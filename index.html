@@ -1221,8 +1221,8 @@
             const info = cfg[type] || cfg.contact;
             const fieldsHTML = info.fields.map(f => {
                 const base = 'width:100%;padding:12px 16px;border-radius:10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:white;outline:none;margin-bottom:12px;font-family:inherit;font-size:0.875rem';
-                if (f.type === 'textarea') return \`<label style="display:block;font-size:0.8rem;color:#9ca3af;margin-bottom:4px">\${f.label}</label><textarea placeholder="\${f.ph}" style="\${base};resize:none;height:80px"></textarea>\`;
-                return \`<label style="display:block;font-size:0.8rem;color:#9ca3af;margin-bottom:4px">\${f.label}</label><input type="\${f.type}" placeholder="\${f.ph}" style="\${base}">\`;
+                if (f.type === 'textarea') return `<label style="display:block;font-size:0.8rem;color:#9ca3af;margin-bottom:4px">\${f.label}</label><textarea placeholder="\${f.ph}" style="\${base};resize:none;height:80px"></textarea>`;
+                return `<label style="display:block;font-size:0.8rem;color:#9ca3af;margin-bottom:4px">\${f.label}</label><input type="\${f.type}" placeholder="\${f.ph}" style="\${base}">`;
             }).join('');
 
             const demoContent = document.getElementById('demo-content');
@@ -1231,7 +1231,7 @@
             const overlay = document.createElement('div');
             overlay.id = 'demo-action-overlay';
             overlay.style.cssText = 'position:absolute;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;z-index:50;opacity:0;transition:opacity 0.25s ease';
-            overlay.innerHTML = \`
+            overlay.innerHTML = `
                 <div id="demo-action-box" style="background:#12122a;border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:28px 32px;max-width:400px;width:90%;transform:translateY(16px);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1)">
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
                         <h3 style="font-size:1.1rem;font-weight:700">\${info.title}</h3>
@@ -1246,7 +1246,7 @@
                         <p style="color:#9ca3af;font-size:0.85rem;line-height:1.5">In der fertigen Website erhalten Sie sofort eine Bestätigungs-E-Mail.</p>
                         <button onclick="closeDemoAction()" style="margin-top:16px;padding:10px 24px;background:#4c6ef5;border:none;border-radius:10px;color:white;font-weight:600;cursor:pointer">Schließen</button>
                     </div>
-                </div>\`;
+                </div>`;
             demoContent.style.position = 'relative';
             demoContent.appendChild(overlay);
             requestAnimationFrame(() => {
