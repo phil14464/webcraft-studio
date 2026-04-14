@@ -457,57 +457,144 @@
         <div class="absolute inset-0 overflow-hidden">
             <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[128px]"></div>
         </div>
-        <div class="max-w-5xl mx-auto px-6 relative z-10">
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
             <div class="text-center mb-16 fade-in">
                 <div class="inline-block px-4 py-1.5 rounded-full glass text-sm text-brand-300 mb-4">Pakete</div>
                 <h2 class="text-4xl lg:text-5xl font-bold mb-4">Transparent & Fair</h2>
-                <p class="text-gray-400">Keine versteckten Kosten. Alles inklusive.</p>
+                <p class="text-gray-400">Keine versteckten Kosten. Wählen Sie das Paket, das zu Ihnen passt.</p>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
+
                 <!-- Starter -->
-                <div class="glass rounded-2xl p-8 fade-in card-hover">
-                    <div class="text-sm text-gray-400 font-medium mb-2">STARTER</div>
-                    <div class="text-4xl font-bold mb-1">€499</div>
-                    <div class="text-sm text-gray-500 mb-6">einmalig</div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> One-Page Website</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> Responsive Design</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> Kontaktformular</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> SEO Grundlagen</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> 1 Korrekturschleife</li>
-                    </ul>
-                    <a href="#contact" class="block text-center py-3 rounded-full glass hover:bg-white/10 font-semibold text-sm transition">Anfragen</a>
+                <div class="glass rounded-2xl overflow-hidden fade-in card-hover flex flex-col">
+                    <!-- Example Preview -->
+                    <div class="aspect-[16/10] bg-gradient-to-br from-amber-900/30 to-stone-900/20 relative group cursor-pointer" onclick="openDemo('starter-example')">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4">
+                            <div class="device-mockup w-full max-w-[260px] scale-90">
+                                <div class="device-mockup-bar"><span class="bg-red-500"></span><span class="bg-yellow-500"></span><span class="bg-green-500"></span></div>
+                                <div class="rounded-b-lg bg-gradient-to-b from-amber-950/80 to-stone-950/80 p-4 text-center">
+                                    <div class="text-2xl mb-1">🍕</div>
+                                    <div class="text-xs font-bold text-amber-100">Pizzeria Napoli</div>
+                                    <div class="text-[10px] text-amber-300/50 mb-2">Authentisch seit 1995</div>
+                                    <div class="h-1 w-12 mx-auto rounded bg-amber-500/40 mb-1"></div>
+                                    <div class="h-1 w-8 mx-auto rounded bg-amber-500/20"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-opacity">
+                            <span class="px-4 py-2 bg-white text-black rounded-full font-semibold text-xs">Beispiel ansehen →</span>
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-1">
+                        <div class="text-xs tracking-widest text-gray-500 font-medium mb-1">PAKET 1</div>
+                        <div class="text-sm text-amber-400 font-semibold mb-3">Die Visitenkarte</div>
+                        <div class="text-4xl font-bold mb-1">ab €499</div>
+                        <div class="text-sm text-gray-500 mb-6">einmalig</div>
+                        <ul class="space-y-3 mb-8 flex-1">
+                            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> Professioneller One-Pager</li>
+                            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> Kontaktformular & Impressum</li>
+                            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> Mobile-optimiert (Responsive)</li>
+                            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> In 48 Stunden live</li>
+                        </ul>
+                        <a href="#contact" class="block text-center py-3 rounded-full glass hover:bg-white/10 font-semibold text-sm transition">Anfragen →</a>
+                    </div>
                 </div>
-                <!-- Professional -->
-                <div class="relative rounded-2xl p-8 fade-in card-hover bg-gradient-to-b from-brand-600/20 to-purple-600/10 border border-brand-500/30">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-brand-600 rounded-full text-xs font-bold">BELIEBT</div>
-                    <div class="text-sm text-brand-300 font-medium mb-2">PROFESSIONAL</div>
-                    <div class="text-4xl font-bold mb-1">€999</div>
-                    <div class="text-sm text-gray-500 mb-6">einmalig</div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> Bis zu 5 Seiten</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> Individuelles Design</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> CMS Integration</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> SEO Optimierung</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> Google Analytics</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> 3 Korrekturschleifen</li>
-                    </ul>
-                    <a href="#contact" class="block text-center py-3 rounded-full bg-brand-600 hover:bg-brand-500 font-semibold text-sm transition">Anfragen</a>
+
+                <!-- Pro (Bestseller) -->
+                <div class="relative rounded-2xl overflow-hidden fade-in card-hover bg-gradient-to-b from-brand-600/20 to-purple-600/10 border-2 border-brand-500/40 flex flex-col">
+                    <div class="absolute top-0 left-0 right-0 bg-brand-600 text-center py-2 text-xs font-bold tracking-wider z-10">⭐ BELIEBTESTE WAHL</div>
+                    <!-- Example Preview -->
+                    <div class="aspect-[16/10] mt-8 bg-gradient-to-br from-brand-900/30 to-indigo-900/20 relative group cursor-pointer" onclick="openDemo('pro-example')">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4">
+                            <div class="device-mockup w-full max-w-[260px] scale-90">
+                                <div class="device-mockup-bar"><span class="bg-red-500"></span><span class="bg-yellow-500"></span><span class="bg-green-500"></span></div>
+                                <div class="rounded-b-lg bg-gradient-to-b from-blue-950/80 to-slate-950/80 p-3">
+                                    <div class="flex items-center justify-between mb-2"><div class="flex items-center gap-1"><div class="w-4 h-4 rounded bg-blue-500 flex items-center justify-center text-[8px] font-bold">MM</div><span class="text-[9px] font-semibold">Meister Müller</span></div><div class="flex gap-2 text-[8px] text-gray-400"><span>Start</span><span>Leistungen</span><span>Team</span><span>Kontakt</span></div></div>
+                                    <div class="text-[10px] font-bold mb-1">Ihr Experte für <span class="text-blue-400">Sanitär</span></div>
+                                    <div class="h-1 w-16 rounded bg-blue-500/40 mb-1"></div>
+                                    <div class="h-1 w-10 rounded bg-blue-500/20 mb-2"></div>
+                                    <div class="grid grid-cols-3 gap-1">
+                                        <div class="h-8 rounded bg-white/5 flex items-center justify-center text-[8px]">🚿</div>
+                                        <div class="h-8 rounded bg-white/5 flex items-center justify-center text-[8px]">🔥</div>
+                                        <div class="h-8 rounded bg-white/5 flex items-center justify-center text-[8px]">🛁</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-opacity">
+                            <span class="px-4 py-2 bg-white text-black rounded-full font-semibold text-xs">Beispiel ansehen →</span>
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-1">
+                        <div class="text-xs tracking-widest text-gray-500 font-medium mb-1">PAKET 2</div>
+                        <div class="text-sm text-brand-300 font-semibold mb-3">Das Business-Paket</div>
+                        <div class="text-4xl font-bold mb-1">ab €1.200</div>
+                        <div class="text-sm text-gray-500 mb-6">einmalig</div>
+                        <ul class="space-y-3 mb-8 flex-1">
+                            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> Mehrseitige Website</li>
+                            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> Detaillierte Leistungsseiten</li>
+                            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> SEO-Basis-Setup</li>
+                            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> Einfaches CMS für eigene Textänderungen</li>
+                        </ul>
+                        <a href="#contact" class="block text-center py-3 rounded-full bg-brand-600 hover:bg-brand-500 font-semibold text-sm transition shadow-lg shadow-brand-600/25">Anfragen →</a>
+                    </div>
                 </div>
+
                 <!-- Premium -->
-                <div class="glass rounded-2xl p-8 fade-in card-hover">
-                    <div class="text-sm text-gray-400 font-medium mb-2">PREMIUM</div>
-                    <div class="text-4xl font-bold mb-1">€1.999</div>
-                    <div class="text-sm text-gray-500 mb-6">einmalig</div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> Unbegrenzte Seiten</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> Premium Design</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> E-Commerce möglich</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> Speed Optimierung</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> 6 Monate Support</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300"><span class="text-green-400">✓</span> Unbegrenzte Korrekturen</li>
-                    </ul>
-                    <a href="#contact" class="block text-center py-3 rounded-full glass hover:bg-white/10 font-semibold text-sm transition">Anfragen</a>
+                <div class="glass rounded-2xl overflow-hidden fade-in card-hover flex flex-col">
+                    <!-- Example Preview -->
+                    <div class="aspect-[16/10] bg-gradient-to-br from-violet-900/30 to-slate-900/20 relative group cursor-pointer" onclick="openDemo('premium-example')">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4">
+                            <div class="device-mockup w-full max-w-[260px] scale-90">
+                                <div class="device-mockup-bar"><span class="bg-red-500"></span><span class="bg-yellow-500"></span><span class="bg-green-500"></span></div>
+                                <div class="rounded-b-lg bg-gradient-to-b from-violet-950/80 to-slate-950/80 p-3">
+                                    <div class="flex items-center justify-between mb-2"><span class="text-[9px] font-bold">IRON<span class="text-violet-400">PULSE</span></span><div class="flex gap-1"><div class="px-2 py-0.5 rounded bg-violet-600/50 text-[7px]">Login</div><div class="px-2 py-0.5 rounded bg-white/10 text-[7px]">Dashboard</div></div></div>
+                                    <div class="grid grid-cols-2 gap-1 mb-2">
+                                        <div class="h-10 rounded bg-white/5 p-1.5"><div class="text-[7px] text-gray-400">Mitglieder</div><div class="text-[10px] font-bold text-violet-400">1.247</div></div>
+                                        <div class="h-10 rounded bg-white/5 p-1.5"><div class="text-[7px] text-gray-400">Buchungen</div><div class="text-[10px] font-bold text-green-400">+38 heute</div></div>
+                                    </div>
+                                    <div class="h-6 rounded bg-white/5 flex items-center px-2 text-[7px] text-gray-400">🔍 Mitglied suchen...</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-opacity">
+                            <span class="px-4 py-2 bg-white text-black rounded-full font-semibold text-xs">Beispiel ansehen →</span>
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-1">
+                        <div class="text-xs tracking-widest text-gray-500 font-medium mb-1">PAKET 3</div>
+                        <div class="text-sm text-violet-400 font-semibold mb-3">Das System</div>
+                        <div class="text-4xl font-bold mb-1">ab €2.500</div>
+                        <div class="text-sm text-gray-500 mb-6">einmalig</div>
+                        <ul class="space-y-3 mb-8 flex-1">
+                            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> Maßgeschneiderte Web-App</li>
+                            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> Login-Bereich für Kunden/Mitarbeiter</li>
+                            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> Datenbank-Anbindung</li>
+                            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> Individuelle Automatisierungen</li>
+                        </ul>
+                        <a href="#contact" class="block text-center py-3 rounded-full glass hover:bg-white/10 font-semibold text-sm transition">Anfragen →</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Hosting Add-on -->
+            <div class="mt-12 fade-in">
+                <div class="rounded-2xl bg-gradient-to-r from-brand-600/10 via-purple-600/10 to-brand-600/10 border border-brand-500/20 p-8 text-center">
+                    <div class="flex items-center justify-center gap-3 mb-3">
+                        <span class="text-2xl">🛡️</span>
+                        <h3 class="text-xl font-bold">Sorglos-Hosting & Wartung</h3>
+                    </div>
+                    <p class="text-gray-400 max-w-2xl mx-auto mb-4">
+                        Zzgl. <span class="text-white font-bold text-lg">39 € / Monat</span> für blitzschnelles Hosting, Updates und SSL-Zertifikate.
+                    </p>
+                    <p class="text-brand-300 font-medium">Wir kümmern uns um die Technik, du dich um dein Business.</p>
+                    <div class="flex flex-wrap justify-center gap-6 mt-6 text-sm text-gray-400">
+                        <span class="flex items-center gap-2"><span class="text-green-400">✓</span> 99,9% Uptime</span>
+                        <span class="flex items-center gap-2"><span class="text-green-400">✓</span> SSL-Zertifikat</span>
+                        <span class="flex items-center gap-2"><span class="text-green-400">✓</span> Tägliche Backups</span>
+                        <span class="flex items-center gap-2"><span class="text-green-400">✓</span> Security Updates</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -737,6 +824,133 @@
                             <div class="p-6 rounded-xl bg-white/5"><h3 class="font-semibold mb-2">Dr. Thomas Weber</h3><p class="text-sm text-gray-400">Wirtschaftsrecht<br>25 Jahre Erfahrung</p></div>
                             <div class="p-6 rounded-xl bg-white/5"><h3 class="font-semibold mb-2">Sarah Klein, LL.M.</h3><p class="text-sm text-gray-400">Arbeitsrecht<br>12 Jahre Erfahrung</p></div>
                             <div class="p-6 rounded-xl bg-white/5"><h3 class="font-semibold mb-2">Marc Fischer</h3><p class="text-sm text-gray-400">Immobilienrecht<br>8 Jahre Erfahrung</p></div>
+                        </div>
+                    </div>`
+            },
+            'starter-example': {
+                title: 'Starter-Paket Beispiel — Pizzeria Napoli (One-Pager)',
+                content: `
+                    <div class="min-h-full bg-gradient-to-b from-amber-950 to-stone-950">
+                        <div class="relative h-[60vh] flex items-center justify-center bg-gradient-to-b from-amber-900/20 to-transparent">
+                            <div class="text-center px-6">
+                                <div class="text-7xl mb-6">🍕</div>
+                                <h1 class="text-5xl md:text-6xl font-bold text-amber-100 mb-2" style="font-family:Georgia,serif">Pizzeria Napoli</h1>
+                                <p class="text-amber-300/60 text-lg tracking-widest uppercase mb-2">Authentisch Italienisch seit 1995</p>
+                                <p class="text-gray-400 max-w-md mx-auto mb-8">Steinofen-Pizza, frische Pasta und herzliche Gastfreundschaft im Herzen der Stadt.</p>
+                                <a href="#" class="inline-block px-8 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-full font-semibold transition">Speisekarte ansehen</a>
+                            </div>
+                        </div>
+                        <div class="max-w-3xl mx-auto px-6 py-16">
+                            <div class="grid md:grid-cols-3 gap-6 mb-16 text-center">
+                                <div class="p-6 rounded-xl bg-white/5"><div class="text-3xl mb-2">📍</div><h3 class="font-semibold text-amber-100 mb-1">Adresse</h3><p class="text-sm text-gray-400">Hauptstraße 12<br>10115 Berlin</p></div>
+                                <div class="p-6 rounded-xl bg-white/5"><div class="text-3xl mb-2">🕐</div><h3 class="font-semibold text-amber-100 mb-1">Öffnungszeiten</h3><p class="text-sm text-gray-400">Di–So: 11:30–22:00<br>Mo: Ruhetag</p></div>
+                                <div class="p-6 rounded-xl bg-white/5"><div class="text-3xl mb-2">📞</div><h3 class="font-semibold text-amber-100 mb-1">Kontakt</h3><p class="text-sm text-gray-400">030 / 123 456 78<br>info@napoli.de</p></div>
+                            </div>
+                            <h2 class="text-2xl font-bold text-amber-100 mb-6 text-center">Unsere Highlights</h2>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="p-5 rounded-xl bg-white/5 border border-amber-500/10"><div class="flex justify-between mb-1"><span class="font-semibold text-amber-100">Margherita</span><span class="text-amber-400 font-semibold">€8.90</span></div><p class="text-sm text-gray-400">Tomaten, Mozzarella, Basilikum</p></div>
+                                <div class="p-5 rounded-xl bg-white/5 border border-amber-500/10"><div class="flex justify-between mb-1"><span class="font-semibold text-amber-100">Quattro Formaggi</span><span class="text-amber-400 font-semibold">€12.90</span></div><p class="text-sm text-gray-400">Vier-Käse mit Gorgonzola & Parmesan</p></div>
+                                <div class="p-5 rounded-xl bg-white/5 border border-amber-500/10"><div class="flex justify-between mb-1"><span class="font-semibold text-amber-100">Pasta Carbonara</span><span class="text-amber-400 font-semibold">€13.90</span></div><p class="text-sm text-gray-400">Guanciale, Eigelb, Pecorino</p></div>
+                                <div class="p-5 rounded-xl bg-white/5 border border-amber-500/10"><div class="flex justify-between mb-1"><span class="font-semibold text-amber-100">Tiramisu</span><span class="text-amber-400 font-semibold">€6.90</span></div><p class="text-sm text-gray-400">Hausgemacht nach Familienrezept</p></div>
+                            </div>
+                            <div class="mt-16 p-8 rounded-2xl bg-white/5 border border-amber-500/10">
+                                <h3 class="text-xl font-bold text-amber-100 mb-4 text-center">Kontaktformular</h3>
+                                <div class="grid md:grid-cols-2 gap-4 mb-4"><div class="h-10 rounded-lg bg-white/5 border border-white/10"></div><div class="h-10 rounded-lg bg-white/5 border border-white/10"></div></div>
+                                <div class="h-24 rounded-lg bg-white/5 border border-white/10 mb-4"></div>
+                                <div class="h-10 w-40 mx-auto rounded-full bg-amber-600/60"></div>
+                            </div>
+                            <div class="mt-8 text-center text-xs text-gray-600">© 2026 Pizzeria Napoli · Impressum · Datenschutz</div>
+                        </div>
+                    </div>`
+            },
+            'pro-example': {
+                title: 'Pro-Paket Beispiel — Meister Müller Sanitär (Mehrseitig + CMS)',
+                content: `
+                    <div class="min-h-full bg-gradient-to-b from-blue-950 to-slate-950">
+                        <div class="flex items-center justify-between max-w-5xl mx-auto px-8 py-5 border-b border-white/5">
+                            <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center font-bold">MM</div><span class="font-bold text-lg">Meister Müller</span></div>
+                            <div class="flex gap-6 text-sm"><span class="text-white font-medium">Start</span><span class="text-gray-400 hover:text-white cursor-pointer">Leistungen</span><span class="text-gray-400 hover:text-white cursor-pointer">Über uns</span><span class="text-gray-400 hover:text-white cursor-pointer">Referenzen</span><span class="text-gray-400 hover:text-white cursor-pointer">Kontakt</span></div>
+                        </div>
+                        <div class="max-w-5xl mx-auto px-8 py-20">
+                            <div class="inline-block px-4 py-1.5 rounded-lg bg-red-500/20 text-red-400 text-sm font-semibold mb-4">🔴 24h Notdienst: 0800-123456</div>
+                            <h1 class="text-5xl font-bold mb-4">Ihr Experte für<br><span class="text-blue-400">Sanitär & Heizung</span></h1>
+                            <p class="text-gray-400 max-w-lg mb-8">Seit 25 Jahren zuverlässig in der Region. Vom tropfenden Wasserhahn bis zur kompletten Badsanierung — alles aus einer Hand.</p>
+                            <div class="flex gap-4"><a href="#" class="px-6 py-3 bg-blue-600 rounded-lg font-semibold">Kostenlos anfragen</a><a href="#" class="px-6 py-3 bg-white/10 rounded-lg">Unsere Leistungen →</a></div>
+                        </div>
+                        <div class="max-w-5xl mx-auto px-8 py-12">
+                            <h2 class="text-2xl font-bold mb-8 text-center">Unsere Leistungen</h2>
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10"><div class="text-3xl mb-3">🚿</div><h3 class="font-semibold mb-2">Sanitär</h3><p class="text-sm text-gray-400">Installation, Reparatur, Wartung aller Sanitäranlagen. Notdienst 24/7 verfügbar.</p><a href="#" class="text-blue-400 text-sm mt-3 inline-block">Mehr erfahren →</a></div>
+                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10"><div class="text-3xl mb-3">🔥</div><h3 class="font-semibold mb-2">Heizung</h3><p class="text-sm text-gray-400">Einbau, Modernisierung, Wärmepumpen. Energieberatung inklusive.</p><a href="#" class="text-blue-400 text-sm mt-3 inline-block">Mehr erfahren →</a></div>
+                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10"><div class="text-3xl mb-3">🛁</div><h3 class="font-semibold mb-2">Badsanierung</h3><p class="text-sm text-gray-400">Komplett-Renovierung aus einer Hand. Von der Planung bis zur Endreinigung.</p><a href="#" class="text-blue-400 text-sm mt-3 inline-block">Mehr erfahren →</a></div>
+                            </div>
+                        </div>
+                        <div class="max-w-5xl mx-auto px-8 py-12">
+                            <h2 class="text-2xl font-bold mb-8 text-center">Unser Team</h2>
+                            <div class="grid md:grid-cols-3 gap-6 text-center">
+                                <div class="p-6 rounded-xl bg-white/5"><div class="w-16 h-16 mx-auto rounded-full bg-blue-500/20 flex items-center justify-center text-2xl mb-3">👨‍🔧</div><h3 class="font-semibold">Hans Müller</h3><p class="text-sm text-blue-400">Meister & Inhaber</p></div>
+                                <div class="p-6 rounded-xl bg-white/5"><div class="w-16 h-16 mx-auto rounded-full bg-blue-500/20 flex items-center justify-center text-2xl mb-3">👨‍🔧</div><h3 class="font-semibold">Thomas Berger</h3><p class="text-sm text-blue-400">Sanitärtechnik</p></div>
+                                <div class="p-6 rounded-xl bg-white/5"><div class="w-16 h-16 mx-auto rounded-full bg-blue-500/20 flex items-center justify-center text-2xl mb-3">👩‍💼</div><h3 class="font-semibold">Lisa Müller</h3><p class="text-sm text-blue-400">Büro & Planung</p></div>
+                            </div>
+                        </div>
+                        <div class="max-w-5xl mx-auto px-8 py-12">
+                            <h2 class="text-2xl font-bold mb-8 text-center">Referenzen</h2>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="p-6 rounded-xl bg-white/5 border-l-4 border-blue-500"><p class="text-sm text-gray-300 italic mb-3">"Schnell, sauber, zuverlässig. Herr Müller hat unsere komplette Heizung in 3 Tagen modernisiert. Top!"</p><p class="text-xs text-gray-500">— Familie Schneider, Berlin</p></div>
+                                <div class="p-6 rounded-xl bg-white/5 border-l-4 border-blue-500"><p class="text-sm text-gray-300 italic mb-3">"Unser neues Badezimmer ist ein Traum. Von Anfang bis Ende professionell betreut."</p><p class="text-xs text-gray-500">— Herr Wagner, Potsdam</p></div>
+                            </div>
+                        </div>
+                        <div class="max-w-3xl mx-auto px-8 py-12">
+                            <div class="p-6 rounded-xl bg-blue-500/5 border border-blue-500/10 text-center text-xs text-gray-500">
+                                <span class="text-blue-400 font-medium">✏️ CMS-Hinweis:</span> Alle Texte, Bilder und Referenzen können Sie selbst über das Content-Management-System bearbeiten.
+                            </div>
+                        </div>
+                    </div>`
+            },
+            'premium-example': {
+                title: 'Premium-Paket Beispiel — IRONPULSE Mitglieder-App',
+                content: `
+                    <div class="min-h-full bg-gradient-to-b from-violet-950 to-slate-950">
+                        <div class="flex items-center justify-between max-w-6xl mx-auto px-8 py-4 border-b border-white/5">
+                            <span class="text-xl font-black">IRON<span class="text-violet-400">PULSE</span></span>
+                            <div class="flex items-center gap-4">
+                                <span class="text-sm text-gray-400">Dashboard</span>
+                                <span class="text-sm text-gray-400">Kurse</span>
+                                <span class="text-sm text-gray-400">Mitglieder</span>
+                                <div class="px-4 py-1.5 rounded-lg bg-violet-600 text-sm font-semibold">Admin Login</div>
+                            </div>
+                        </div>
+                        <div class="max-w-6xl mx-auto px-8 py-8">
+                            <div class="flex items-center justify-between mb-8"><h1 class="text-2xl font-bold">Dashboard</h1><span class="text-sm text-gray-400">Willkommen, Max 👋</span></div>
+                            <div class="grid md:grid-cols-4 gap-4 mb-8">
+                                <div class="p-5 rounded-xl bg-white/5"><div class="text-xs text-gray-500 mb-1">Aktive Mitglieder</div><div class="text-3xl font-bold text-violet-400">1.247</div><div class="text-xs text-green-400 mt-1">↑ +12 diese Woche</div></div>
+                                <div class="p-5 rounded-xl bg-white/5"><div class="text-xs text-gray-500 mb-1">Buchungen heute</div><div class="text-3xl font-bold text-blue-400">38</div><div class="text-xs text-gray-500 mt-1">von 50 Plätzen</div></div>
+                                <div class="p-5 rounded-xl bg-white/5"><div class="text-xs text-gray-500 mb-1">Umsatz (Monat)</div><div class="text-3xl font-bold text-green-400">€24.8k</div><div class="text-xs text-green-400 mt-1">↑ +8% vs. Vormonat</div></div>
+                                <div class="p-5 rounded-xl bg-white/5"><div class="text-xs text-gray-500 mb-1">Auslastung</div><div class="text-3xl font-bold text-amber-400">76%</div><div class="text-xs text-gray-500 mt-1">Ø letzte 30 Tage</div></div>
+                            </div>
+                            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                                <div class="md:col-span-2 p-6 rounded-xl bg-white/5">
+                                    <h3 class="font-semibold mb-4">Heutige Kurse</h3>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white/5"><div><span class="font-medium">Yoga Flow</span><span class="text-xs text-gray-400 ml-3">09:00</span></div><div class="flex items-center gap-2"><span class="text-xs text-gray-400">18/20</span><span class="px-2 py-0.5 rounded bg-green-500/20 text-green-400 text-xs">Fast voll</span></div></div>
+                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white/5"><div><span class="font-medium">HIIT Power</span><span class="text-xs text-gray-400 ml-3">10:30</span></div><div class="flex items-center gap-2"><span class="text-xs text-gray-400">12/25</span><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-xs">Verfügbar</span></div></div>
+                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white/5"><div><span class="font-medium">Spinning</span><span class="text-xs text-gray-400 ml-3">17:00</span></div><div class="flex items-center gap-2"><span class="text-xs text-gray-400">20/20</span><span class="px-2 py-0.5 rounded bg-red-500/20 text-red-400 text-xs">Ausgebucht</span></div></div>
+                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white/5"><div><span class="font-medium">Krafttraining</span><span class="text-xs text-gray-400 ml-3">18:30</span></div><div class="flex items-center gap-2"><span class="text-xs text-gray-400">8/15</span><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-xs">Verfügbar</span></div></div>
+                                    </div>
+                                </div>
+                                <div class="p-6 rounded-xl bg-white/5">
+                                    <h3 class="font-semibold mb-4">Neue Mitglieder</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-violet-500/30 flex items-center justify-center text-xs">LS</div><div><div class="text-sm font-medium">Laura S.</div><div class="text-xs text-gray-500">Premium · heute</div></div></div>
+                                        <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-blue-500/30 flex items-center justify-center text-xs">MK</div><div><div class="text-sm font-medium">Marco K.</div><div class="text-xs text-gray-500">Basic · gestern</div></div></div>
+                                        <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-green-500/30 flex items-center justify-center text-xs">AF</div><div><div class="text-sm font-medium">Anna F.</div><div class="text-xs text-gray-500">Premium · vor 2 Tagen</div></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-6 rounded-xl bg-violet-500/5 border border-violet-500/10 text-center">
+                                <p class="text-sm text-gray-400">🔒 <span class="text-violet-400 font-medium">Login-geschützter Bereich</span> — Mitglieder können Kurse buchen, ihren Trainingsplan einsehen und Rechnungen herunterladen.</p>
+                                <p class="text-xs text-gray-500 mt-2">Datenbank-Anbindung · Automatische E-Mail-Benachrichtigungen · Stripe-Zahlungen · API-Schnittstellen</p>
+                            </div>
                         </div>
                     </div>`
             },
