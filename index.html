@@ -113,6 +113,9 @@
             font-variant-numeric: tabular-nums;
         }
         /* Showcase filter animation */
+        #showcase-grid {
+            position: relative;
+        }
         #showcase-grid > div {
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
@@ -918,7 +921,7 @@
                                 <div class="text-6xl mb-6">🍝</div>
                                 <h1 class="text-5xl font-bold text-amber-100 mb-2" style="font-family:Georgia,serif">La Tavola</h1>
                                 <p class="text-amber-300/70 text-lg tracking-widest uppercase">Authentisch Italienisch seit 1998</p>
-                                <a class="demo-link inline-block mt-8 px-8 py-3 border border-amber-400/50 text-amber-200 rounded-full cursor-pointer hover:bg-amber-400/10 transition-all">Tisch reservieren</a>
+                                <a onclick="demoContact()" onclick="demoContact()" class="demo-link inline-block mt-8 px-8 py-3 border border-amber-400/50 text-amber-200 rounded-full cursor-pointer hover:bg-amber-400/10 transition-all">Tisch reservieren</a>
                             </div>
                         </div>
                         <div class="max-w-4xl mx-auto px-8 py-16">
@@ -929,7 +932,7 @@
                                 <div class="p-6 rounded-xl bg-white/5 border border-amber-500/10 hover:bg-white/10 transition cursor-default"><div class="flex justify-between mb-2"><span class="font-semibold text-amber-100">Ossobuco alla Milanese</span><span class="text-amber-400">€24.90</span></div><p class="text-sm text-gray-400">Geschmorte Kalbshaxe, Safran-Risotto, Gremolata</p></div>
                                 <div class="p-6 rounded-xl bg-white/5 border border-amber-500/10 hover:bg-white/10 transition cursor-default"><div class="flex justify-between mb-2"><span class="font-semibold text-amber-100">Tiramisù</span><span class="text-amber-400">€7.90</span></div><p class="text-sm text-gray-400">Hausgemacht nach Nonna's Rezept</p></div>
                             </div>
-                            <div class="mt-12 text-center"><a class="demo-link inline-block px-8 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-full font-semibold cursor-pointer transition-all">Jetzt reservieren →</a></div>
+                            <div class="mt-12 text-center"><a onclick="demoContact()" onclick="demoContact()" class="demo-link inline-block px-8 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-full font-semibold cursor-pointer transition-all">Jetzt reservieren →</a></div>
                         </div>
                     </div>`
             },
@@ -945,7 +948,7 @@
                             <div class="inline-block px-3 py-1 rounded bg-red-500/20 text-red-400 text-sm font-semibold mb-4 animate-pulse">🔴 24h Notdienst: 0800-123456</div>
                             <h1 class="text-5xl font-bold mb-4">Ihr Experte für<br><span class="text-blue-400">Sanitär & Heizung</span></h1>
                             <p class="text-gray-400 max-w-lg mb-8">Seit 25 Jahren zuverlässig in der Region. Vom tropfenden Wasserhahn bis zur kompletten Badsanierung.</p>
-                            <div class="flex gap-4"><a class="demo-link px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold cursor-pointer transition-all">Termin anfragen</a><a class="demo-link px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg cursor-pointer transition-all">Unsere Leistungen →</a></div>
+                            <div class="flex gap-4"><a onclick="demoContact()" onclick="demoContact()" class="demo-link px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold cursor-pointer transition-all">Termin anfragen</a><a onclick="demoContact()" onclick="demoContact()" class="demo-link px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg cursor-pointer transition-all">Unsere Leistungen →</a></div>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 py-16 grid md:grid-cols-3 gap-6">
                             <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 text-center hover:bg-white/10 hover:-translate-y-1 transition-all cursor-default"><div class="text-3xl mb-3">🚿</div><h3 class="font-semibold mb-2">Sanitär</h3><p class="text-sm text-gray-400">Installation, Reparatur, Wartung</p></div>
@@ -962,7 +965,7 @@
                             <div class="text-6xl mb-6">🦷</div>
                             <h1 class="text-5xl font-bold mb-4">Zahnarztpraxis<br><span class="text-emerald-400">Dr. med. dent. Schmidt</span></h1>
                             <p class="text-gray-400 max-w-lg mx-auto mb-8">Moderne Zahnmedizin in entspannter Atmosphäre. Ihr Lächeln ist unsere Leidenschaft.</p>
-                            <a class="demo-link inline-block px-8 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-full font-semibold cursor-pointer transition-all">Online-Termin buchen</a>
+                            <a onclick="demoContact()" onclick="demoContact()" class="demo-link inline-block px-8 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-full font-semibold cursor-pointer transition-all">Online-Termin buchen</a>
                         </div>
                         <div class="max-w-4xl mx-auto px-8 pb-16 grid md:grid-cols-2 gap-6">
                             <div class="p-6 rounded-xl bg-white/5 border border-emerald-500/10 hover:bg-white/10 transition"><h3 class="font-semibold text-emerald-300 mb-2">Öffnungszeiten</h3><p class="text-sm text-gray-400">Mo–Fr: 8:00–18:00<br>Sa: 9:00–13:00 (nach Vereinbarung)</p></div>
@@ -979,7 +982,7 @@
                             <h1 class="text-6xl font-light mb-4 tracking-wide" style="font-family:Georgia,serif">ÉLÉGANCE</h1>
                             <div class="w-16 h-px bg-pink-400/50 mx-auto mb-4"></div>
                             <p class="text-gray-400 mb-8">Curated Fashion · Neue Kollektion Frühjahr 2026</p>
-                            <a class="demo-link inline-block px-8 py-3 border border-pink-400/40 text-pink-200 hover:bg-pink-400/10 transition-all tracking-wider text-sm uppercase cursor-pointer">Kollektion entdecken</a>
+                            <a onclick="demoContact()" onclick="demoContact()" class="demo-link inline-block px-8 py-3 border border-pink-400/40 text-pink-200 hover:bg-pink-400/10 transition-all tracking-wider text-sm uppercase cursor-pointer">Kollektion entdecken</a>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 pb-16 grid grid-cols-3 gap-4">
                             <div class="aspect-[3/4] rounded-xl bg-gradient-to-b from-pink-900/30 to-transparent flex items-end p-4 hover:from-pink-900/50 transition-all cursor-pointer"><span class="text-sm text-pink-200/70">Kleider</span></div>
@@ -995,7 +998,7 @@
                         <div class="max-w-5xl mx-auto px-8 py-20">
                             <h1 class="text-5xl font-bold mb-4">Kanzlei<br><span class="text-slate-300">Weber & Partner</span></h1>
                             <p class="text-gray-400 max-w-lg mb-8">Kompetente Rechtsberatung seit 1985. Wirtschaftsrecht · Arbeitsrecht · Immobilienrecht.</p>
-                            <a class="demo-link inline-block px-8 py-3 bg-white text-black rounded font-semibold cursor-pointer hover:bg-gray-200 transition-all">Erstberatung vereinbaren</a>
+                            <a onclick="demoContact()" onclick="demoContact()" class="demo-link inline-block px-8 py-3 bg-white text-black rounded font-semibold cursor-pointer hover:bg-gray-200 transition-all">Erstberatung vereinbaren</a>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 pb-16 grid md:grid-cols-3 gap-6">
                             <div class="p-6 rounded-xl bg-white/5 hover:bg-white/10 transition cursor-default"><h3 class="font-semibold mb-2">Dr. Thomas Weber</h3><p class="text-sm text-gray-400">Wirtschaftsrecht<br>25 Jahre Erfahrung</p></div>
@@ -1014,7 +1017,7 @@
                                 <h1 class="text-5xl md:text-6xl font-bold text-amber-100 mb-2" style="font-family:Georgia,serif">Pizzeria Napoli</h1>
                                 <p class="text-amber-300/60 text-lg tracking-widest uppercase mb-2">Authentisch Italienisch seit 1995</p>
                                 <p class="text-gray-400 max-w-md mx-auto mb-8">Steinofen-Pizza, frische Pasta und herzliche Gastfreundschaft im Herzen der Stadt.</p>
-                                <a class="demo-link inline-block px-8 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-full font-semibold cursor-pointer transition-all">Speisekarte ansehen ↓</a>
+                                <a onclick="demoContact()" onclick="demoContact()" class="demo-link inline-block px-8 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-full font-semibold cursor-pointer transition-all">Speisekarte ansehen ↓</a>
                             </div>
                         </div>
                         <div class="max-w-3xl mx-auto px-6 py-16">
@@ -1037,7 +1040,7 @@
                                     <input type="email" placeholder="Ihre E-Mail" class="px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-amber-500 focus:outline-none transition">
                                 </div>
                                 <textarea placeholder="Ihre Nachricht..." rows="3" class="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-amber-500 focus:outline-none transition resize-none mb-4"></textarea>
-                                <button class="w-full py-3 bg-amber-600 hover:bg-amber-500 rounded-lg font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]">Nachricht senden →</button>
+                                <button onclick="demoContact()" class="w-full py-3 bg-amber-600 hover:bg-amber-500 rounded-lg font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]">Nachricht senden →</button>
                             </div>
                             <div class="mt-8 text-center text-xs text-gray-600">© 2026 Pizzeria Napoli · <span class="hover:text-white cursor-pointer transition">Impressum</span> · <span class="hover:text-white cursor-pointer transition">Datenschutz</span></div>
                         </div>
@@ -1055,14 +1058,14 @@
                             <div class="inline-block px-4 py-1.5 rounded-lg bg-red-500/20 text-red-400 text-sm font-semibold mb-4 animate-pulse">🔴 24h Notdienst: 0800-123456</div>
                             <h1 class="text-5xl font-bold mb-4">Ihr Experte für<br><span class="text-blue-400">Sanitär & Heizung</span></h1>
                             <p class="text-gray-400 max-w-lg mb-8">Seit 25 Jahren zuverlässig in der Region. Vom tropfenden Wasserhahn bis zur kompletten Badsanierung — alles aus einer Hand.</p>
-                            <div class="flex gap-4"><a class="demo-link px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold cursor-pointer transition-all">Kostenlos anfragen</a><a class="demo-link px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg cursor-pointer transition-all">Unsere Leistungen →</a></div>
+                            <div class="flex gap-4"><a onclick="demoContact()" onclick="demoContact()" class="demo-link px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold cursor-pointer transition-all">Kostenlos anfragen</a><a onclick="demoContact()" onclick="demoContact()" class="demo-link px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg cursor-pointer transition-all">Unsere Leistungen →</a></div>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 py-12">
                             <h2 class="text-2xl font-bold mb-8 text-center">Unsere Leistungen</h2>
                             <div class="grid md:grid-cols-3 gap-6">
-                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 hover:bg-white/10 hover:-translate-y-1 transition-all cursor-default"><div class="text-3xl mb-3">🚿</div><h3 class="font-semibold mb-2">Sanitär</h3><p class="text-sm text-gray-400">Installation, Reparatur, Wartung aller Sanitäranlagen. Notdienst 24/7 verfügbar.</p><span class="demo-link text-blue-400 text-sm mt-3 inline-block cursor-pointer">Mehr erfahren →</span></div>
-                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 hover:bg-white/10 hover:-translate-y-1 transition-all cursor-default"><div class="text-3xl mb-3">🔥</div><h3 class="font-semibold mb-2">Heizung</h3><p class="text-sm text-gray-400">Einbau, Modernisierung, Wärmepumpen. Energieberatung inklusive.</p><span class="demo-link text-blue-400 text-sm mt-3 inline-block cursor-pointer">Mehr erfahren →</span></div>
-                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 hover:bg-white/10 hover:-translate-y-1 transition-all cursor-default"><div class="text-3xl mb-3">🛁</div><h3 class="font-semibold mb-2">Badsanierung</h3><p class="text-sm text-gray-400">Komplett-Renovierung aus einer Hand. Von der Planung bis zur Endreinigung.</p><span class="demo-link text-blue-400 text-sm mt-3 inline-block cursor-pointer">Mehr erfahren →</span></div>
+                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 hover:bg-white/10 hover:-translate-y-1 transition-all cursor-default"><div class="text-3xl mb-3">🚿</div><h3 class="font-semibold mb-2">Sanitär</h3><p class="text-sm text-gray-400">Installation, Reparatur, Wartung aller Sanitäranlagen. Notdienst 24/7 verfügbar.</p><span onclick="demoContact()" class="demo-link text-blue-400 text-sm mt-3 inline-block cursor-pointer">Mehr erfahren →</span></div>
+                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 hover:bg-white/10 hover:-translate-y-1 transition-all cursor-default"><div class="text-3xl mb-3">🔥</div><h3 class="font-semibold mb-2">Heizung</h3><p class="text-sm text-gray-400">Einbau, Modernisierung, Wärmepumpen. Energieberatung inklusive.</p><span onclick="demoContact()" class="demo-link text-blue-400 text-sm mt-3 inline-block cursor-pointer">Mehr erfahren →</span></div>
+                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 hover:bg-white/10 hover:-translate-y-1 transition-all cursor-default"><div class="text-3xl mb-3">🛁</div><h3 class="font-semibold mb-2">Badsanierung</h3><p class="text-sm text-gray-400">Komplett-Renovierung aus einer Hand. Von der Planung bis zur Endreinigung.</p><span onclick="demoContact()" class="demo-link text-blue-400 text-sm mt-3 inline-block cursor-pointer">Mehr erfahren →</span></div>
                             </div>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 py-12">
@@ -1142,7 +1145,7 @@
                             <div class="text-6xl mb-6">🏋️</div>
                             <h1 class="text-6xl font-black mb-4 tracking-tight">IRON<span class="text-violet-400">PULSE</span></h1>
                             <p class="text-gray-400 max-w-lg mx-auto mb-8">Push your limits. Modernste Geräte, Top-Trainer, 24/7 geöffnet.</p>
-                            <div class="flex justify-center gap-4"><a class="demo-link px-8 py-3 bg-violet-600 hover:bg-violet-500 rounded-full font-bold cursor-pointer transition-all">Probetraining buchen</a><a class="demo-link px-8 py-3 bg-white/10 hover:bg-white/20 rounded-full cursor-pointer transition-all">Mitglied werden</a></div>
+                            <div class="flex justify-center gap-4"><a onclick="demoContact()" onclick="demoContact()" class="demo-link px-8 py-3 bg-violet-600 hover:bg-violet-500 rounded-full font-bold cursor-pointer transition-all">Probetraining buchen</a><a onclick="demoContact()" onclick="demoContact()" class="demo-link px-8 py-3 bg-white/10 hover:bg-white/20 rounded-full cursor-pointer transition-all">Mitglied werden</a></div>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 pb-16 grid md:grid-cols-4 gap-4 text-center">
                             <div class="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition"><div class="text-2xl font-bold text-violet-400">500+</div><div class="text-xs text-gray-500">Mitglieder</div></div>
@@ -1180,6 +1183,14 @@
                 modal.classList.remove('modal-entering');
                 document.body.style.overflow = '';
             }, 300);
+        }
+
+        function demoContact() {
+            closeDemo();
+            setTimeout(() => {
+                const contact = document.querySelector('#contact');
+                if (contact) contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 350);
         }
 
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDemo(); });
