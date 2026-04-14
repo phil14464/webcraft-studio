@@ -51,6 +51,20 @@
             transform: translateY(-8px);
             box-shadow: 0 25px 60px -12px rgba(76, 110, 245, 0.25);
         }
+        .problem-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .problem-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: rgba(76, 110, 245, 0.3);
+            box-shadow: 0 20px 40px -12px rgba(76, 110, 245, 0.15);
+        }
+        .problem-card:hover .problem-emoji {
+            transform: scale(1.2);
+        }
+        .problem-emoji {
+            transition: transform 0.3s ease;
+        }
         .hero-gradient {
             background: radial-gradient(ellipse at 30% 0%, rgba(76, 110, 245, 0.15) 0%, transparent 50%),
                         radial-gradient(ellipse at 70% 0%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
@@ -98,6 +112,96 @@
         .stat-counter {
             font-variant-numeric: tabular-nums;
         }
+        /* Showcase filter animation */
+        #showcase-grid > div {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        #showcase-grid > div.filter-hidden {
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+        /* Modal animations */
+        #demo-modal .modal-backdrop {
+            transition: opacity 0.3s ease;
+        }
+        #demo-modal .modal-content {
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #demo-modal.modal-entering .modal-backdrop { opacity: 0; }
+        #demo-modal.modal-entering .modal-content { opacity: 0; transform: scale(0.95) translateY(20px); }
+        #demo-modal.modal-visible .modal-backdrop { opacity: 1; }
+        #demo-modal.modal-visible .modal-content { opacity: 1; transform: scale(1) translateY(0); }
+        /* Scroll to top button */
+        #scroll-top {
+            transition: all 0.3s ease;
+        }
+        #scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #scroll-top:not(.visible) {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+        /* Process step connector lines */
+        .step-card { position: relative; }
+        @media (min-width: 768px) {
+            .step-card:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: -12px;
+                width: 24px;
+                height: 2px;
+                background: linear-gradient(90deg, rgba(76,110,245,0.4), rgba(76,110,245,0.1));
+            }
+        }
+        /* Pulse animation for CTA */
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(76,110,245,0.3); }
+            50% { box-shadow: 0 0 40px rgba(76,110,245,0.6); }
+        }
+        /* Demo internal link hover */
+        .demo-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .demo-link:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.2);
+        }
+        .demo-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+        .demo-link:hover::after {
+            width: 100%;
+        }
+        /* Typing cursor for hero */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+            font-weight: 100;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
     </style>
 </head>
 <body class="bg-[#0a0a1a] text-white font-sans antialiased overflow-x-hidden">
@@ -105,68 +209,68 @@
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-2">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center font-bold text-lg">W</div>
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform">W</div>
                 <span class="text-xl font-bold">WebCraft<span class="text-brand-400">Studio</span></span>
             </a>
             <div class="hidden md:flex items-center gap-8">
-                <a href="#showcase" class="text-sm text-gray-300 hover:text-white transition">Designs</a>
-                <a href="#process" class="text-sm text-gray-300 hover:text-white transition">Ablauf</a>
-                <a href="#pricing" class="text-sm text-gray-300 hover:text-white transition">Pakete</a>
-                <a href="#contact" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 rounded-full text-sm font-semibold transition">Kontakt</a>
+                <a href="#showcase" class="text-sm text-gray-300 hover:text-white transition relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-brand-500 after:transition-all hover:after:w-full">Designs</a>
+                <a href="#process" class="text-sm text-gray-300 hover:text-white transition relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-brand-500 after:transition-all hover:after:w-full">Ablauf</a>
+                <a href="#pricing" class="text-sm text-gray-300 hover:text-white transition relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-brand-500 after:transition-all hover:after:w-full">Pakete</a>
+                <a href="#contact" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 rounded-full text-sm font-semibold transition hover:scale-105">Kontakt</a>
             </div>
-            <button class="md:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <button class="md:hidden text-white" id="mobile-toggle">
+                <svg class="w-6 h-6 transition-transform" id="hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden glass mx-4 rounded-2xl p-4 mb-2">
-            <a href="#showcase" class="block py-2 text-gray-300 hover:text-white">Designs</a>
-            <a href="#process" class="block py-2 text-gray-300 hover:text-white">Ablauf</a>
-            <a href="#pricing" class="block py-2 text-gray-300 hover:text-white">Pakete</a>
-            <a href="#contact" class="block py-2 text-brand-400 font-semibold">Kontakt</a>
+        <div id="mobile-menu" class="hidden md:hidden glass mx-4 rounded-2xl p-4 mb-2 transition-all">
+            <a href="#showcase" class="mobile-link block py-3 px-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">Designs</a>
+            <a href="#process" class="mobile-link block py-3 px-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">Ablauf</a>
+            <a href="#pricing" class="mobile-link block py-3 px-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">Pakete</a>
+            <a href="#contact" class="mobile-link block py-3 px-2 text-brand-400 font-semibold hover:bg-white/5 rounded-lg transition">Kontakt</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center hero-gradient pt-20">
         <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-brand-600/20 rounded-full blur-[128px]"></div>
-            <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-600/15 rounded-full blur-[128px]"></div>
+            <div class="absolute top-20 left-10 w-72 h-72 bg-brand-600/20 rounded-full blur-[128px] animate-pulse"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-600/15 rounded-full blur-[128px] animate-pulse" style="animation-delay: 1s;"></div>
         </div>
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
             <div>
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-brand-300 mb-6">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-brand-300 mb-6 fade-in">
                     <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
                     Jetzt verfügbar — Kostenlose Erstberatung
                 </div>
-                <h1 class="text-5xl lg:text-7xl font-extrabold leading-tight mb-6">
+                <h1 class="text-5xl lg:text-7xl font-extrabold leading-tight mb-6 fade-in" style="transition-delay: 0.1s;">
                     Ihre Website.<br>
                     <span class="gradient-text">Neu gedacht.</span>
                 </h1>
-                <p class="text-lg text-gray-400 max-w-lg mb-8 leading-relaxed">
+                <p class="text-lg text-gray-400 max-w-lg mb-8 leading-relaxed fade-in" style="transition-delay: 0.2s;">
                     Wir gestalten moderne, professionelle Websites, die Kunden überzeugen und Ihr Unternehmen von der Konkurrenz abheben.
                 </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#showcase" class="px-8 py-4 bg-brand-600 hover:bg-brand-500 rounded-full font-semibold transition shadow-lg shadow-brand-600/25 hover:shadow-brand-500/40">
+                <div class="flex flex-wrap gap-4 fade-in" style="transition-delay: 0.3s;">
+                    <a href="#showcase" class="px-8 py-4 bg-brand-600 hover:bg-brand-500 rounded-full font-semibold transition shadow-lg shadow-brand-600/25 hover:shadow-brand-500/40 hover:scale-105 pulse-glow">
                         Designs ansehen →
                     </a>
-                    <a href="#contact" class="px-8 py-4 glass rounded-full font-semibold hover:bg-white/10 transition">
+                    <a href="#contact" class="px-8 py-4 glass rounded-full font-semibold hover:bg-white/10 transition hover:scale-105">
                         Kostenlos beraten lassen
                     </a>
                 </div>
-                <div class="flex items-center gap-8 mt-12">
+                <div class="flex items-center gap-8 mt-12 fade-in" style="transition-delay: 0.4s;">
                     <div>
-                        <div class="text-3xl font-bold stat-counter">50+</div>
+                        <div class="text-3xl font-bold stat-counter" data-target="50" data-suffix="+">0</div>
                         <div class="text-sm text-gray-500">Projekte</div>
                     </div>
                     <div class="w-px h-10 bg-gray-700"></div>
                     <div>
-                        <div class="text-3xl font-bold stat-counter">100%</div>
+                        <div class="text-3xl font-bold stat-counter" data-target="100" data-suffix="%">0</div>
                         <div class="text-sm text-gray-500">Zufriedenheit</div>
                     </div>
                     <div class="w-px h-10 bg-gray-700"></div>
                     <div>
-                        <div class="text-3xl font-bold stat-counter">48h</div>
+                        <div class="text-3xl font-bold stat-counter" data-target="48" data-suffix="h">0</div>
                         <div class="text-sm text-gray-500">Erste Version</div>
                     </div>
                 </div>
@@ -193,6 +297,11 @@
                 </div>
             </div>
         </div>
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+            <span class="text-xs text-gray-500">Mehr entdecken</span>
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </div>
     </section>
 
     <!-- Problem Section -->
@@ -200,18 +309,18 @@
         <div class="max-w-4xl mx-auto px-6 text-center fade-in">
             <h2 class="text-3xl lg:text-4xl font-bold mb-6">Kennen Sie das?</h2>
             <div class="grid md:grid-cols-3 gap-6 mt-12">
-                <div class="glass rounded-2xl p-6 text-left">
-                    <div class="text-3xl mb-4">😬</div>
+                <div class="glass rounded-2xl p-6 text-left problem-card cursor-default fade-in" style="transition-delay: 0.1s;">
+                    <div class="text-3xl mb-4 problem-emoji inline-block">😬</div>
                     <h3 class="font-semibold mb-2">Veraltete Website</h3>
                     <p class="text-sm text-gray-400">Ihre Website sieht aus wie 2010? Kunden klicken weg, bevor sie anfragen.</p>
                 </div>
-                <div class="glass rounded-2xl p-6 text-left">
-                    <div class="text-3xl mb-4">📱</div>
+                <div class="glass rounded-2xl p-6 text-left problem-card cursor-default fade-in" style="transition-delay: 0.2s;">
+                    <div class="text-3xl mb-4 problem-emoji inline-block">📱</div>
                     <h3 class="font-semibold mb-2">Nicht mobilfähig</h3>
                     <p class="text-sm text-gray-400">70% der Besucher kommen per Handy. Wenn es dort nicht funktioniert, verlieren Sie Kunden.</p>
                 </div>
-                <div class="glass rounded-2xl p-6 text-left">
-                    <div class="text-3xl mb-4">🤷</div>
+                <div class="glass rounded-2xl p-6 text-left problem-card cursor-default fade-in" style="transition-delay: 0.3s;">
+                    <div class="text-3xl mb-4 problem-emoji inline-block">🤷</div>
                     <h3 class="font-semibold mb-2">Gar keine Website</h3>
                     <p class="text-sm text-gray-400">Ohne Online-Präsenz existieren Sie für neue Kunden schlicht nicht.</p>
                 </div>
@@ -233,22 +342,22 @@
 
             <!-- Filter Tabs -->
             <div class="flex flex-wrap justify-center gap-3 mb-12 fade-in">
-                <button class="filter-btn active px-5 py-2 rounded-full text-sm font-medium bg-brand-600 text-white transition" data-filter="all">Alle</button>
-                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium glass text-gray-300 hover:text-white transition" data-filter="gastro">Gastronomie</button>
-                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium glass text-gray-300 hover:text-white transition" data-filter="handwerk">Handwerk</button>
-                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium glass text-gray-300 hover:text-white transition" data-filter="health">Gesundheit</button>
-                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium glass text-gray-300 hover:text-white transition" data-filter="retail">Einzelhandel</button>
-                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium glass text-gray-300 hover:text-white transition" data-filter="consulting">Beratung</button>
+                <button class="filter-btn active px-5 py-2 rounded-full text-sm font-medium bg-brand-600 text-white transition-all hover:scale-105" data-filter="all">Alle</button>
+                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium glass text-gray-300 hover:text-white transition-all hover:scale-105" data-filter="gastro">Gastronomie</button>
+                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium glass text-gray-300 hover:text-white transition-all hover:scale-105" data-filter="handwerk">Handwerk</button>
+                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium glass text-gray-300 hover:text-white transition-all hover:scale-105" data-filter="health">Gesundheit</button>
+                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium glass text-gray-300 hover:text-white transition-all hover:scale-105" data-filter="retail">Einzelhandel</button>
+                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium glass text-gray-300 hover:text-white transition-all hover:scale-105" data-filter="consulting">Beratung</button>
             </div>
 
             <!-- Design Cards -->
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="showcase-grid">
 
                 <!-- Card 1: Restaurant -->
-                <div class="card-hover rounded-2xl overflow-hidden glass fade-in" data-category="gastro">
+                <div class="card-hover rounded-2xl overflow-hidden glass fade-in" data-category="gastro" style="transition-delay: 0.05s;">
                     <div class="aspect-[4/3] bg-gradient-to-br from-amber-900/40 to-orange-900/30 relative group cursor-pointer" onclick="openDemo('restaurant')">
                         <div class="absolute inset-0 flex flex-col items-center justify-center p-6">
-                            <div class="text-5xl mb-4">🍽️</div>
+                            <div class="text-5xl mb-4 group-hover:scale-110 transition-transform">🍽️</div>
                             <h3 class="text-2xl font-bold mb-1">La Tavola</h3>
                             <p class="text-amber-200/70 text-sm">Italienisches Restaurant</p>
                             <div class="mt-4 flex gap-1">
@@ -257,8 +366,8 @@
                                 <div class="h-1.5 w-6 rounded bg-amber-500/30"></div>
                             </div>
                         </div>
-                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-opacity">
-                            <span class="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm">Vorschau ansehen →</span>
+                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                            <span class="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Vorschau ansehen →</span>
                         </div>
                     </div>
                     <div class="p-5">
@@ -273,10 +382,10 @@
                 </div>
 
                 <!-- Card 2: Handwerker -->
-                <div class="card-hover rounded-2xl overflow-hidden glass fade-in" data-category="handwerk">
+                <div class="card-hover rounded-2xl overflow-hidden glass fade-in" data-category="handwerk" style="transition-delay: 0.1s;">
                     <div class="aspect-[4/3] bg-gradient-to-br from-blue-900/40 to-cyan-900/30 relative group cursor-pointer" onclick="openDemo('handwerk')">
                         <div class="absolute inset-0 flex flex-col items-center justify-center p-6">
-                            <div class="text-5xl mb-4">🔧</div>
+                            <div class="text-5xl mb-4 group-hover:scale-110 transition-transform">🔧</div>
                             <h3 class="text-2xl font-bold mb-1">Meister Müller</h3>
                             <p class="text-blue-200/70 text-sm">Sanitär & Heizung</p>
                             <div class="mt-4 flex gap-1">
@@ -285,8 +394,8 @@
                                 <div class="h-1.5 w-14 rounded bg-blue-500/30"></div>
                             </div>
                         </div>
-                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-opacity">
-                            <span class="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm">Vorschau ansehen →</span>
+                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                            <span class="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Vorschau ansehen →</span>
                         </div>
                     </div>
                     <div class="p-5">
@@ -301,10 +410,10 @@
                 </div>
 
                 <!-- Card 3: Arztpraxis -->
-                <div class="card-hover rounded-2xl overflow-hidden glass fade-in" data-category="health">
+                <div class="card-hover rounded-2xl overflow-hidden glass fade-in" data-category="health" style="transition-delay: 0.15s;">
                     <div class="aspect-[4/3] bg-gradient-to-br from-emerald-900/40 to-teal-900/30 relative group cursor-pointer" onclick="openDemo('arzt')">
                         <div class="absolute inset-0 flex flex-col items-center justify-center p-6">
-                            <div class="text-5xl mb-4">🏥</div>
+                            <div class="text-5xl mb-4 group-hover:scale-110 transition-transform">🏥</div>
                             <h3 class="text-2xl font-bold mb-1">Dr. Schmidt</h3>
                             <p class="text-emerald-200/70 text-sm">Zahnarztpraxis</p>
                             <div class="mt-4 flex gap-1">
@@ -313,8 +422,8 @@
                                 <div class="h-1.5 w-10 rounded bg-emerald-500/30"></div>
                             </div>
                         </div>
-                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-opacity">
-                            <span class="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm">Vorschau ansehen →</span>
+                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                            <span class="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Vorschau ansehen →</span>
                         </div>
                     </div>
                     <div class="p-5">
@@ -329,10 +438,10 @@
                 </div>
 
                 <!-- Card 4: Boutique -->
-                <div class="card-hover rounded-2xl overflow-hidden glass fade-in" data-category="retail">
+                <div class="card-hover rounded-2xl overflow-hidden glass fade-in" data-category="retail" style="transition-delay: 0.2s;">
                     <div class="aspect-[4/3] bg-gradient-to-br from-pink-900/40 to-rose-900/30 relative group cursor-pointer" onclick="openDemo('boutique')">
                         <div class="absolute inset-0 flex flex-col items-center justify-center p-6">
-                            <div class="text-5xl mb-4">👗</div>
+                            <div class="text-5xl mb-4 group-hover:scale-110 transition-transform">👗</div>
                             <h3 class="text-2xl font-bold mb-1">ÉLÉGANCE</h3>
                             <p class="text-pink-200/70 text-sm">Fashion Boutique</p>
                             <div class="mt-4 flex gap-1">
@@ -341,8 +450,8 @@
                                 <div class="h-1.5 w-6 rounded bg-pink-500/30"></div>
                             </div>
                         </div>
-                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-opacity">
-                            <span class="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm">Vorschau ansehen →</span>
+                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                            <span class="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Vorschau ansehen →</span>
                         </div>
                     </div>
                     <div class="p-5">
@@ -357,10 +466,10 @@
                 </div>
 
                 <!-- Card 5: Anwalt/Berater -->
-                <div class="card-hover rounded-2xl overflow-hidden glass fade-in" data-category="consulting">
+                <div class="card-hover rounded-2xl overflow-hidden glass fade-in" data-category="consulting" style="transition-delay: 0.25s;">
                     <div class="aspect-[4/3] bg-gradient-to-br from-slate-800/60 to-gray-900/40 relative group cursor-pointer" onclick="openDemo('kanzlei')">
                         <div class="absolute inset-0 flex flex-col items-center justify-center p-6">
-                            <div class="text-5xl mb-4">⚖️</div>
+                            <div class="text-5xl mb-4 group-hover:scale-110 transition-transform">⚖️</div>
                             <h3 class="text-2xl font-bold mb-1">Kanzlei Weber</h3>
                             <p class="text-slate-300/70 text-sm">Rechtsanwälte</p>
                             <div class="mt-4 flex gap-1">
@@ -369,8 +478,8 @@
                                 <div class="h-1.5 w-10 rounded bg-slate-400/30"></div>
                             </div>
                         </div>
-                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-opacity">
-                            <span class="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm">Vorschau ansehen →</span>
+                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                            <span class="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Vorschau ansehen →</span>
                         </div>
                     </div>
                     <div class="p-5">
@@ -385,10 +494,10 @@
                 </div>
 
                 <!-- Card 6: Fitness -->
-                <div class="card-hover rounded-2xl overflow-hidden glass fade-in" data-category="health">
+                <div class="card-hover rounded-2xl overflow-hidden glass fade-in" data-category="health" style="transition-delay: 0.3s;">
                     <div class="aspect-[4/3] bg-gradient-to-br from-violet-900/40 to-indigo-900/30 relative group cursor-pointer" onclick="openDemo('fitness')">
                         <div class="absolute inset-0 flex flex-col items-center justify-center p-6">
-                            <div class="text-5xl mb-4">💪</div>
+                            <div class="text-5xl mb-4 group-hover:scale-110 transition-transform">💪</div>
                             <h3 class="text-2xl font-bold mb-1">IRONPULSE</h3>
                             <p class="text-violet-200/70 text-sm">Fitnessstudio</p>
                             <div class="mt-4 flex gap-1">
@@ -397,8 +506,8 @@
                                 <div class="h-1.5 w-8 rounded bg-violet-500/30"></div>
                             </div>
                         </div>
-                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-opacity">
-                            <span class="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm">Vorschau ansehen →</span>
+                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                            <span class="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Vorschau ansehen →</span>
                         </div>
                     </div>
                     <div class="p-5">
@@ -424,26 +533,26 @@
                 <h2 class="text-4xl lg:text-5xl font-bold mb-4">In <span class="gradient-text">4 Schritten</span> zur neuen Website</h2>
             </div>
             <div class="grid md:grid-cols-4 gap-6">
-                <div class="glass rounded-2xl p-6 text-center fade-in relative">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center font-bold text-sm">1</div>
+                <div class="glass rounded-2xl p-6 text-center fade-in step-card card-hover" style="transition-delay: 0.1s;">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center font-bold text-sm shadow-lg shadow-brand-600/30">1</div>
                     <div class="text-3xl mt-4 mb-3">💬</div>
                     <h3 class="font-semibold mb-2">Gespräch</h3>
                     <p class="text-sm text-gray-400">Wir lernen Ihr Unternehmen kennen und verstehen Ihre Ziele.</p>
                 </div>
-                <div class="glass rounded-2xl p-6 text-center fade-in relative">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center font-bold text-sm">2</div>
+                <div class="glass rounded-2xl p-6 text-center fade-in step-card card-hover" style="transition-delay: 0.2s;">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center font-bold text-sm shadow-lg shadow-brand-600/30">2</div>
                     <div class="text-3xl mt-4 mb-3">🎨</div>
                     <h3 class="font-semibold mb-2">Design</h3>
                     <p class="text-sm text-gray-400">Innerhalb von 48h erhalten Sie Ihren persönlichen Entwurf.</p>
                 </div>
-                <div class="glass rounded-2xl p-6 text-center fade-in relative">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center font-bold text-sm">3</div>
+                <div class="glass rounded-2xl p-6 text-center fade-in step-card card-hover" style="transition-delay: 0.3s;">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center font-bold text-sm shadow-lg shadow-brand-600/30">3</div>
                     <div class="text-3xl mt-4 mb-3">⚡</div>
                     <h3 class="font-semibold mb-2">Umsetzung</h3>
                     <p class="text-sm text-gray-400">Wir bauen Ihre Website — schnell, modern, responsive.</p>
                 </div>
-                <div class="glass rounded-2xl p-6 text-center fade-in relative">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center font-bold text-sm">4</div>
+                <div class="glass rounded-2xl p-6 text-center fade-in step-card card-hover" style="transition-delay: 0.4s;">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center font-bold text-sm shadow-lg shadow-brand-600/30">4</div>
                     <div class="text-3xl mt-4 mb-3">🚀</div>
                     <h3 class="font-semibold mb-2">Launch</h3>
                     <p class="text-sm text-gray-400">Ihre neue Website geht online. Wir betreuen Sie weiter.</p>
@@ -466,8 +575,7 @@
             <div class="grid md:grid-cols-3 gap-8">
 
                 <!-- Starter -->
-                <div class="glass rounded-2xl overflow-hidden fade-in card-hover flex flex-col">
-                    <!-- Example Preview -->
+                <div class="glass rounded-2xl overflow-hidden fade-in card-hover flex flex-col" style="transition-delay: 0.1s;">
                     <div class="aspect-[16/10] bg-gradient-to-br from-amber-900/30 to-stone-900/20 relative group cursor-pointer" onclick="openDemo('starter-example')">
                         <div class="absolute inset-0 flex flex-col items-center justify-center p-4">
                             <div class="device-mockup w-full max-w-[260px] scale-90">
@@ -481,8 +589,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-opacity">
-                            <span class="px-4 py-2 bg-white text-black rounded-full font-semibold text-xs">Beispiel ansehen →</span>
+                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                            <span class="px-4 py-2 bg-white text-black rounded-full font-semibold text-xs transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Beispiel ansehen →</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-1">
@@ -496,14 +604,13 @@
                             <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> Mobile-optimiert (Responsive)</li>
                             <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> In 48 Stunden live</li>
                         </ul>
-                        <a href="#contact" class="block text-center py-3 rounded-full glass hover:bg-white/10 font-semibold text-sm transition">Anfragen →</a>
+                        <a href="#contact" class="block text-center py-3 rounded-full glass hover:bg-white/10 font-semibold text-sm transition hover:scale-105">Anfragen →</a>
                     </div>
                 </div>
 
                 <!-- Pro (Bestseller) -->
-                <div class="relative rounded-2xl overflow-hidden fade-in card-hover bg-gradient-to-b from-brand-600/20 to-purple-600/10 border-2 border-brand-500/40 flex flex-col">
+                <div class="relative rounded-2xl overflow-hidden fade-in card-hover bg-gradient-to-b from-brand-600/20 to-purple-600/10 border-2 border-brand-500/40 flex flex-col" style="transition-delay: 0.2s;">
                     <div class="absolute top-0 left-0 right-0 bg-brand-600 text-center py-2 text-xs font-bold tracking-wider z-10">⭐ BELIEBTESTE WAHL</div>
-                    <!-- Example Preview -->
                     <div class="aspect-[16/10] mt-8 bg-gradient-to-br from-brand-900/30 to-indigo-900/20 relative group cursor-pointer" onclick="openDemo('pro-example')">
                         <div class="absolute inset-0 flex flex-col items-center justify-center p-4">
                             <div class="device-mockup w-full max-w-[260px] scale-90">
@@ -521,8 +628,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-opacity">
-                            <span class="px-4 py-2 bg-white text-black rounded-full font-semibold text-xs">Beispiel ansehen →</span>
+                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                            <span class="px-4 py-2 bg-white text-black rounded-full font-semibold text-xs transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Beispiel ansehen →</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-1">
@@ -536,13 +643,12 @@
                             <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> SEO-Basis-Setup</li>
                             <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> Einfaches CMS für eigene Textänderungen</li>
                         </ul>
-                        <a href="#contact" class="block text-center py-3 rounded-full bg-brand-600 hover:bg-brand-500 font-semibold text-sm transition shadow-lg shadow-brand-600/25">Anfragen →</a>
+                        <a href="#contact" class="block text-center py-3 rounded-full bg-brand-600 hover:bg-brand-500 font-semibold text-sm transition shadow-lg shadow-brand-600/25 hover:scale-105">Anfragen →</a>
                     </div>
                 </div>
 
                 <!-- Premium -->
-                <div class="glass rounded-2xl overflow-hidden fade-in card-hover flex flex-col">
-                    <!-- Example Preview -->
+                <div class="glass rounded-2xl overflow-hidden fade-in card-hover flex flex-col" style="transition-delay: 0.3s;">
                     <div class="aspect-[16/10] bg-gradient-to-br from-violet-900/30 to-slate-900/20 relative group cursor-pointer" onclick="openDemo('premium-example')">
                         <div class="absolute inset-0 flex flex-col items-center justify-center p-4">
                             <div class="device-mockup w-full max-w-[260px] scale-90">
@@ -557,8 +663,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-opacity">
-                            <span class="px-4 py-2 bg-white text-black rounded-full font-semibold text-xs">Beispiel ansehen →</span>
+                        <div class="preview-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                            <span class="px-4 py-2 bg-white text-black rounded-full font-semibold text-xs transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Beispiel ansehen →</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-1">
@@ -572,7 +678,7 @@
                             <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> Datenbank-Anbindung</li>
                             <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-green-400 mt-0.5">✓</span> Individuelle Automatisierungen</li>
                         </ul>
-                        <a href="#contact" class="block text-center py-3 rounded-full glass hover:bg-white/10 font-semibold text-sm transition">Anfragen →</a>
+                        <a href="#contact" class="block text-center py-3 rounded-full glass hover:bg-white/10 font-semibold text-sm transition hover:scale-105">Anfragen →</a>
                     </div>
                 </div>
 
@@ -580,7 +686,7 @@
 
             <!-- Hosting Add-on -->
             <div class="mt-12 fade-in">
-                <div class="rounded-2xl bg-gradient-to-r from-brand-600/10 via-purple-600/10 to-brand-600/10 border border-brand-500/20 p-8 text-center">
+                <div class="rounded-2xl bg-gradient-to-r from-brand-600/10 via-purple-600/10 to-brand-600/10 border border-brand-500/20 p-8 text-center hover:border-brand-500/40 transition-all duration-500">
                     <div class="flex items-center justify-center gap-3 mb-3">
                         <span class="text-2xl">🛡️</span>
                         <h3 class="text-xl font-bold">Sorglos-Hosting & Wartung</h3>
@@ -611,27 +717,42 @@
             <form class="glass rounded-2xl p-8 space-y-6 fade-in" id="contact-form" onsubmit="submitForm(event)">
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-sm text-gray-400 mb-2">Name</label>
-                        <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:outline-none transition text-white placeholder-gray-600" placeholder="Max Mustermann">
+                        <label class="block text-sm text-gray-400 mb-2">Name *</label>
+                        <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-all text-white placeholder-gray-600" placeholder="Max Mustermann">
                     </div>
                     <div>
-                        <label class="block text-sm text-gray-400 mb-2">E-Mail</label>
-                        <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:outline-none transition text-white placeholder-gray-600" placeholder="max@firma.de">
+                        <label class="block text-sm text-gray-400 mb-2">E-Mail *</label>
+                        <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-all text-white placeholder-gray-600" placeholder="max@firma.de">
                     </div>
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-400 mb-2">Telefon</label>
+                    <input type="tel" name="phone" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-all text-white placeholder-gray-600" placeholder="+49 123 456 789">
                 </div>
                 <div>
                     <label class="block text-sm text-gray-400 mb-2">Website (falls vorhanden)</label>
-                    <input type="url" name="website" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:outline-none transition text-white placeholder-gray-600" placeholder="https://www.ihre-firma.de">
+                    <input type="url" name="website" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-all text-white placeholder-gray-600" placeholder="https://www.ihre-firma.de">
                 </div>
                 <div>
-                    <label class="block text-sm text-gray-400 mb-2">Nachricht</label>
-                    <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:outline-none transition text-white placeholder-gray-600 resize-none" placeholder="Erzählen Sie uns von Ihrem Projekt..."></textarea>
+                    <label class="block text-sm text-gray-400 mb-2">Welches Paket interessiert Sie?</label>
+                    <select name="paket" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-all text-white appearance-none cursor-pointer">
+                        <option value="" class="bg-[#1a1a2e]">Bitte wählen...</option>
+                        <option value="starter" class="bg-[#1a1a2e]">🎯 Starter — Die Visitenkarte (ab €499)</option>
+                        <option value="pro" class="bg-[#1a1a2e]">⭐ Pro — Das Business-Paket (ab €1.200)</option>
+                        <option value="premium" class="bg-[#1a1a2e]">🚀 Premium — Das System (ab €2.500)</option>
+                        <option value="unsicher" class="bg-[#1a1a2e]">🤔 Noch unsicher — bitte beraten</option>
+                    </select>
                 </div>
-                <button type="submit" class="w-full py-4 bg-brand-600 hover:bg-brand-500 rounded-xl font-semibold transition shadow-lg shadow-brand-600/25">
+                <div>
+                    <label class="block text-sm text-gray-400 mb-2">Nachricht *</label>
+                    <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-all text-white placeholder-gray-600 resize-none" placeholder="Erzählen Sie uns von Ihrem Projekt..."></textarea>
+                </div>
+                <button type="submit" id="submit-btn" class="w-full py-4 bg-brand-600 hover:bg-brand-500 rounded-xl font-semibold transition-all shadow-lg shadow-brand-600/25 hover:scale-[1.02] hover:shadow-brand-500/40 active:scale-[0.98]">
                     Kostenlos beraten lassen →
                 </button>
-                <div id="form-success" class="hidden text-center text-green-400 font-medium">
-                    ✅ Vielen Dank! Wir melden uns innerhalb von 24 Stunden.
+                <div id="form-success" class="hidden text-center py-4 rounded-xl bg-green-500/10 border border-green-500/20">
+                    <div class="text-green-400 font-medium text-lg mb-1">✅ Vielen Dank!</div>
+                    <p class="text-sm text-gray-400">Wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
                 </div>
             </form>
         </div>
@@ -640,44 +761,70 @@
     <!-- Footer -->
     <footer class="border-t border-white/5 py-12">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center font-bold text-sm">W</div>
-                    <span class="font-bold">WebCraft<span class="text-brand-400">Studio</span></span>
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center font-bold text-sm">W</div>
+                        <span class="font-bold">WebCraft<span class="text-brand-400">Studio</span></span>
+                    </div>
+                    <p class="text-sm text-gray-500">Moderne Websites für Unternehmen, die wachsen wollen.</p>
                 </div>
-                <div class="flex gap-6 text-sm text-gray-500">
-                    <a href="#" class="hover:text-white transition">Impressum</a>
-                    <a href="#" class="hover:text-white transition">Datenschutz</a>
-                    <a href="#" class="hover:text-white transition">AGB</a>
+                <div>
+                    <h4 class="font-semibold text-sm mb-4">Navigation</h4>
+                    <div class="space-y-2">
+                        <a href="#showcase" class="block text-sm text-gray-500 hover:text-white transition">Designs</a>
+                        <a href="#process" class="block text-sm text-gray-500 hover:text-white transition">Ablauf</a>
+                        <a href="#pricing" class="block text-sm text-gray-500 hover:text-white transition">Pakete</a>
+                        <a href="#contact" class="block text-sm text-gray-500 hover:text-white transition">Kontakt</a>
+                    </div>
                 </div>
+                <div>
+                    <h4 class="font-semibold text-sm mb-4">Rechtliches</h4>
+                    <div class="space-y-2">
+                        <a href="#contact" class="block text-sm text-gray-500 hover:text-white transition">Impressum</a>
+                        <a href="#contact" class="block text-sm text-gray-500 hover:text-white transition">Datenschutz</a>
+                        <a href="#contact" class="block text-sm text-gray-500 hover:text-white transition">AGB</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
                 <div class="text-sm text-gray-600">
                     © 2026 WebCraft Studio. Alle Rechte vorbehalten.
+                </div>
+                <div class="flex gap-4">
+                    <a href="#contact" class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:scale-110 transition-all" title="E-Mail">✉️</a>
+                    <a href="#contact" class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:scale-110 transition-all" title="Telefon">📞</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-brand-600 hover:bg-brand-500 flex items-center justify-center shadow-lg shadow-brand-600/30 z-40 hover:scale-110 transition-all">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+    </button>
+
     <!-- Demo Modal -->
-    <div id="demo-modal" class="fixed inset-0 z-[100] hidden">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeDemo()"></div>
-        <div class="absolute inset-4 md:inset-8 lg:inset-16 rounded-2xl overflow-hidden bg-[#0a0a1a] border border-white/10 shadow-2xl flex flex-col">
+    <div id="demo-modal" class="fixed inset-0 z-[100] hidden modal-entering">
+        <div class="modal-backdrop absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeDemo()"></div>
+        <div class="modal-content absolute inset-4 md:inset-8 lg:inset-16 rounded-2xl overflow-hidden bg-[#0a0a1a] border border-white/10 shadow-2xl flex flex-col">
             <div class="flex items-center justify-between p-4 border-b border-white/10">
                 <div class="flex items-center gap-3">
                     <div class="flex gap-1.5">
-                        <span class="w-3 h-3 rounded-full bg-red-500 cursor-pointer" onclick="closeDemo()"></span>
+                        <span class="w-3 h-3 rounded-full bg-red-500 cursor-pointer hover:brightness-125 transition" onclick="closeDemo()"></span>
                         <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
                         <span class="w-3 h-3 rounded-full bg-green-500"></span>
                     </div>
                     <span id="demo-title" class="text-sm text-gray-400"></span>
                 </div>
-                <button onclick="closeDemo()" class="text-gray-400 hover:text-white transition">✕</button>
+                <button onclick="closeDemo()" class="w-8 h-8 rounded-lg hover:bg-white/10 flex items-center justify-center text-gray-400 hover:text-white transition">✕</button>
             </div>
-            <div class="flex-1 overflow-auto" id="demo-content"></div>
+            <div class="flex-1 overflow-auto scroll-smooth" id="demo-content"></div>
         </div>
     </div>
 
     <script>
-        // Navbar scroll effect
+        // ===== NAVBAR =====
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) {
@@ -685,9 +832,26 @@
             } else {
                 nav.classList.remove('glass');
             }
+            // Scroll to top button
+            const st = document.getElementById('scroll-top');
+            if (window.scrollY > 500) {
+                st.classList.add('visible');
+            } else {
+                st.classList.remove('visible');
+            }
         });
 
-        // Fade-in on scroll
+        // ===== MOBILE MENU =====
+        document.getElementById('mobile-toggle').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // ===== FADE IN ON SCROLL =====
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -695,10 +859,32 @@
                 }
             });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // Filter tabs
+        // ===== ANIMATED STAT COUNTERS =====
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.dataset.target);
+                    const suffix = el.dataset.suffix || '';
+                    let current = 0;
+                    const increment = target / 40;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        el.textContent = Math.floor(current) + suffix;
+                    }, 30);
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+        // ===== FILTER TABS =====
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach(b => {
@@ -709,17 +895,19 @@
                 btn.classList.remove('glass', 'text-gray-300');
 
                 const filter = btn.dataset.filter;
-                document.querySelectorAll('#showcase-grid > div').forEach(card => {
+                document.querySelectorAll('#showcase-grid > div').forEach((card, i) => {
                     if (filter === 'all' || card.dataset.category === filter) {
-                        card.style.display = '';
+                        card.classList.remove('filter-hidden');
+                        card.style.transitionDelay = (i * 0.05) + 's';
                     } else {
-                        card.style.display = 'none';
+                        card.classList.add('filter-hidden');
+                        card.style.transitionDelay = '0s';
                     }
                 });
             });
         });
 
-        // Demo previews
+        // ===== DEMO MODAL =====
         const demos = {
             restaurant: {
                 title: 'La Tavola — Italienisches Restaurant',
@@ -730,29 +918,18 @@
                                 <div class="text-6xl mb-6">🍝</div>
                                 <h1 class="text-5xl font-bold text-amber-100 mb-2" style="font-family:Georgia,serif">La Tavola</h1>
                                 <p class="text-amber-300/70 text-lg tracking-widest uppercase">Authentisch Italienisch seit 1998</p>
-                                <a href="#" class="inline-block mt-8 px-8 py-3 border border-amber-400/50 text-amber-200 rounded hover:bg-amber-400/10 transition">Tisch reservieren</a>
+                                <a class="demo-link inline-block mt-8 px-8 py-3 border border-amber-400/50 text-amber-200 rounded-full cursor-pointer hover:bg-amber-400/10 transition-all">Tisch reservieren</a>
                             </div>
                         </div>
                         <div class="max-w-4xl mx-auto px-8 py-16">
                             <h2 class="text-2xl font-bold text-amber-100 mb-8 text-center">Unsere Speisekarte</h2>
                             <div class="grid md:grid-cols-2 gap-6">
-                                <div class="p-6 rounded-xl bg-white/5 border border-amber-500/10">
-                                    <div class="flex justify-between mb-2"><span class="font-semibold text-amber-100">Bruschetta Classica</span><span class="text-amber-400">€8.90</span></div>
-                                    <p class="text-sm text-gray-400">Geröstetes Ciabatta, Tomaten, Basilikum, Olivenöl</p>
-                                </div>
-                                <div class="p-6 rounded-xl bg-white/5 border border-amber-500/10">
-                                    <div class="flex justify-between mb-2"><span class="font-semibold text-amber-100">Risotto ai Funghi</span><span class="text-amber-400">€16.90</span></div>
-                                    <p class="text-sm text-gray-400">Arborio Reis, Steinpilze, Parmesan, Trüffelöl</p>
-                                </div>
-                                <div class="p-6 rounded-xl bg-white/5 border border-amber-500/10">
-                                    <div class="flex justify-between mb-2"><span class="font-semibold text-amber-100">Ossobuco alla Milanese</span><span class="text-amber-400">€24.90</span></div>
-                                    <p class="text-sm text-gray-400">Geschmorte Kalbshaxe, Safran-Risotto, Gremolata</p>
-                                </div>
-                                <div class="p-6 rounded-xl bg-white/5 border border-amber-500/10">
-                                    <div class="flex justify-between mb-2"><span class="font-semibold text-amber-100">Tiramisù</span><span class="text-amber-400">€7.90</span></div>
-                                    <p class="text-sm text-gray-400">Hausgemacht nach Nonna's Rezept</p>
-                                </div>
+                                <div class="p-6 rounded-xl bg-white/5 border border-amber-500/10 hover:bg-white/10 transition cursor-default"><div class="flex justify-between mb-2"><span class="font-semibold text-amber-100">Bruschetta Classica</span><span class="text-amber-400">€8.90</span></div><p class="text-sm text-gray-400">Geröstetes Ciabatta, Tomaten, Basilikum, Olivenöl</p></div>
+                                <div class="p-6 rounded-xl bg-white/5 border border-amber-500/10 hover:bg-white/10 transition cursor-default"><div class="flex justify-between mb-2"><span class="font-semibold text-amber-100">Risotto ai Funghi</span><span class="text-amber-400">€16.90</span></div><p class="text-sm text-gray-400">Arborio Reis, Steinpilze, Parmesan, Trüffelöl</p></div>
+                                <div class="p-6 rounded-xl bg-white/5 border border-amber-500/10 hover:bg-white/10 transition cursor-default"><div class="flex justify-between mb-2"><span class="font-semibold text-amber-100">Ossobuco alla Milanese</span><span class="text-amber-400">€24.90</span></div><p class="text-sm text-gray-400">Geschmorte Kalbshaxe, Safran-Risotto, Gremolata</p></div>
+                                <div class="p-6 rounded-xl bg-white/5 border border-amber-500/10 hover:bg-white/10 transition cursor-default"><div class="flex justify-between mb-2"><span class="font-semibold text-amber-100">Tiramisù</span><span class="text-amber-400">€7.90</span></div><p class="text-sm text-gray-400">Hausgemacht nach Nonna's Rezept</p></div>
                             </div>
+                            <div class="mt-12 text-center"><a class="demo-link inline-block px-8 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-full font-semibold cursor-pointer transition-all">Jetzt reservieren →</a></div>
                         </div>
                     </div>`
             },
@@ -762,18 +939,18 @@
                     <div class="min-h-full bg-gradient-to-b from-blue-950 to-slate-950">
                         <div class="flex items-center justify-between max-w-5xl mx-auto px-8 py-6">
                             <div class="flex items-center gap-3"><div class="w-10 h-10 rounded bg-blue-500 flex items-center justify-center font-bold">MM</div><span class="font-bold text-lg">Meister Müller</span></div>
-                            <div class="flex gap-6 text-sm text-gray-400"><span>Leistungen</span><span>Referenzen</span><span>Notdienst</span></div>
+                            <div class="flex gap-6 text-sm text-gray-400"><span class="hover:text-white cursor-pointer transition">Leistungen</span><span class="hover:text-white cursor-pointer transition">Referenzen</span><span class="hover:text-white cursor-pointer transition">Notdienst</span></div>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 py-20">
-                            <div class="inline-block px-3 py-1 rounded bg-red-500/20 text-red-400 text-sm font-semibold mb-4">🔴 24h Notdienst: 0800-123456</div>
+                            <div class="inline-block px-3 py-1 rounded bg-red-500/20 text-red-400 text-sm font-semibold mb-4 animate-pulse">🔴 24h Notdienst: 0800-123456</div>
                             <h1 class="text-5xl font-bold mb-4">Ihr Experte für<br><span class="text-blue-400">Sanitär & Heizung</span></h1>
                             <p class="text-gray-400 max-w-lg mb-8">Seit 25 Jahren zuverlässig in der Region. Vom tropfenden Wasserhahn bis zur kompletten Badsanierung.</p>
-                            <div class="flex gap-4"><a href="#" class="px-6 py-3 bg-blue-600 rounded-lg font-semibold">Termin anfragen</a><a href="#" class="px-6 py-3 bg-white/10 rounded-lg">Unsere Leistungen</a></div>
+                            <div class="flex gap-4"><a class="demo-link px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold cursor-pointer transition-all">Termin anfragen</a><a class="demo-link px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg cursor-pointer transition-all">Unsere Leistungen →</a></div>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 py-16 grid md:grid-cols-3 gap-6">
-                            <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 text-center"><div class="text-3xl mb-3">🚿</div><h3 class="font-semibold mb-2">Sanitär</h3><p class="text-sm text-gray-400">Installation, Reparatur, Wartung</p></div>
-                            <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 text-center"><div class="text-3xl mb-3">🔥</div><h3 class="font-semibold mb-2">Heizung</h3><p class="text-sm text-gray-400">Einbau, Modernisierung, Wärmepumpen</p></div>
-                            <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 text-center"><div class="text-3xl mb-3">🛁</div><h3 class="font-semibold mb-2">Badsanierung</h3><p class="text-sm text-gray-400">Komplett aus einer Hand</p></div>
+                            <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 text-center hover:bg-white/10 hover:-translate-y-1 transition-all cursor-default"><div class="text-3xl mb-3">🚿</div><h3 class="font-semibold mb-2">Sanitär</h3><p class="text-sm text-gray-400">Installation, Reparatur, Wartung</p></div>
+                            <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 text-center hover:bg-white/10 hover:-translate-y-1 transition-all cursor-default"><div class="text-3xl mb-3">🔥</div><h3 class="font-semibold mb-2">Heizung</h3><p class="text-sm text-gray-400">Einbau, Modernisierung, Wärmepumpen</p></div>
+                            <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 text-center hover:bg-white/10 hover:-translate-y-1 transition-all cursor-default"><div class="text-3xl mb-3">🛁</div><h3 class="font-semibold mb-2">Badsanierung</h3><p class="text-sm text-gray-400">Komplett aus einer Hand</p></div>
                         </div>
                     </div>`
             },
@@ -785,11 +962,11 @@
                             <div class="text-6xl mb-6">🦷</div>
                             <h1 class="text-5xl font-bold mb-4">Zahnarztpraxis<br><span class="text-emerald-400">Dr. med. dent. Schmidt</span></h1>
                             <p class="text-gray-400 max-w-lg mx-auto mb-8">Moderne Zahnmedizin in entspannter Atmosphäre. Ihr Lächeln ist unsere Leidenschaft.</p>
-                            <a href="#" class="inline-block px-8 py-3 bg-emerald-600 rounded-full font-semibold">Online-Termin buchen</a>
+                            <a class="demo-link inline-block px-8 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-full font-semibold cursor-pointer transition-all">Online-Termin buchen</a>
                         </div>
                         <div class="max-w-4xl mx-auto px-8 pb-16 grid md:grid-cols-2 gap-6">
-                            <div class="p-6 rounded-xl bg-white/5 border border-emerald-500/10"><h3 class="font-semibold text-emerald-300 mb-2">Öffnungszeiten</h3><p class="text-sm text-gray-400">Mo–Fr: 8:00–18:00<br>Sa: 9:00–13:00 (nach Vereinbarung)</p></div>
-                            <div class="p-6 rounded-xl bg-white/5 border border-emerald-500/10"><h3 class="font-semibold text-emerald-300 mb-2">Leistungen</h3><p class="text-sm text-gray-400">Prophylaxe · Implantologie · Ästhetische Zahnmedizin · Angstpatienten</p></div>
+                            <div class="p-6 rounded-xl bg-white/5 border border-emerald-500/10 hover:bg-white/10 transition"><h3 class="font-semibold text-emerald-300 mb-2">Öffnungszeiten</h3><p class="text-sm text-gray-400">Mo–Fr: 8:00–18:00<br>Sa: 9:00–13:00 (nach Vereinbarung)</p></div>
+                            <div class="p-6 rounded-xl bg-white/5 border border-emerald-500/10 hover:bg-white/10 transition"><h3 class="font-semibold text-emerald-300 mb-2">Leistungen</h3><p class="text-sm text-gray-400">Prophylaxe · Implantologie · Ästhetische Zahnmedizin · Angstpatienten</p></div>
                         </div>
                     </div>`
             },
@@ -802,12 +979,12 @@
                             <h1 class="text-6xl font-light mb-4 tracking-wide" style="font-family:Georgia,serif">ÉLÉGANCE</h1>
                             <div class="w-16 h-px bg-pink-400/50 mx-auto mb-4"></div>
                             <p class="text-gray-400 mb-8">Curated Fashion · Neue Kollektion Frühjahr 2026</p>
-                            <a href="#" class="inline-block px-8 py-3 border border-pink-400/40 text-pink-200 hover:bg-pink-400/10 transition tracking-wider text-sm uppercase">Kollektion entdecken</a>
+                            <a class="demo-link inline-block px-8 py-3 border border-pink-400/40 text-pink-200 hover:bg-pink-400/10 transition-all tracking-wider text-sm uppercase cursor-pointer">Kollektion entdecken</a>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 pb-16 grid grid-cols-3 gap-4">
-                            <div class="aspect-[3/4] rounded-xl bg-gradient-to-b from-pink-900/30 to-transparent flex items-end p-4"><span class="text-sm text-pink-200/70">Kleider</span></div>
-                            <div class="aspect-[3/4] rounded-xl bg-gradient-to-b from-rose-900/30 to-transparent flex items-end p-4"><span class="text-sm text-pink-200/70">Accessoires</span></div>
-                            <div class="aspect-[3/4] rounded-xl bg-gradient-to-b from-fuchsia-900/30 to-transparent flex items-end p-4"><span class="text-sm text-pink-200/70">Schuhe</span></div>
+                            <div class="aspect-[3/4] rounded-xl bg-gradient-to-b from-pink-900/30 to-transparent flex items-end p-4 hover:from-pink-900/50 transition-all cursor-pointer"><span class="text-sm text-pink-200/70">Kleider</span></div>
+                            <div class="aspect-[3/4] rounded-xl bg-gradient-to-b from-rose-900/30 to-transparent flex items-end p-4 hover:from-rose-900/50 transition-all cursor-pointer"><span class="text-sm text-pink-200/70">Accessoires</span></div>
+                            <div class="aspect-[3/4] rounded-xl bg-gradient-to-b from-fuchsia-900/30 to-transparent flex items-end p-4 hover:from-fuchsia-900/50 transition-all cursor-pointer"><span class="text-sm text-pink-200/70">Schuhe</span></div>
                         </div>
                     </div>`
             },
@@ -818,17 +995,17 @@
                         <div class="max-w-5xl mx-auto px-8 py-20">
                             <h1 class="text-5xl font-bold mb-4">Kanzlei<br><span class="text-slate-300">Weber & Partner</span></h1>
                             <p class="text-gray-400 max-w-lg mb-8">Kompetente Rechtsberatung seit 1985. Wirtschaftsrecht · Arbeitsrecht · Immobilienrecht.</p>
-                            <a href="#" class="inline-block px-8 py-3 bg-white text-black rounded font-semibold">Erstberatung vereinbaren</a>
+                            <a class="demo-link inline-block px-8 py-3 bg-white text-black rounded font-semibold cursor-pointer hover:bg-gray-200 transition-all">Erstberatung vereinbaren</a>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 pb-16 grid md:grid-cols-3 gap-6">
-                            <div class="p-6 rounded-xl bg-white/5"><h3 class="font-semibold mb-2">Dr. Thomas Weber</h3><p class="text-sm text-gray-400">Wirtschaftsrecht<br>25 Jahre Erfahrung</p></div>
-                            <div class="p-6 rounded-xl bg-white/5"><h3 class="font-semibold mb-2">Sarah Klein, LL.M.</h3><p class="text-sm text-gray-400">Arbeitsrecht<br>12 Jahre Erfahrung</p></div>
-                            <div class="p-6 rounded-xl bg-white/5"><h3 class="font-semibold mb-2">Marc Fischer</h3><p class="text-sm text-gray-400">Immobilienrecht<br>8 Jahre Erfahrung</p></div>
+                            <div class="p-6 rounded-xl bg-white/5 hover:bg-white/10 transition cursor-default"><h3 class="font-semibold mb-2">Dr. Thomas Weber</h3><p class="text-sm text-gray-400">Wirtschaftsrecht<br>25 Jahre Erfahrung</p></div>
+                            <div class="p-6 rounded-xl bg-white/5 hover:bg-white/10 transition cursor-default"><h3 class="font-semibold mb-2">Sarah Klein, LL.M.</h3><p class="text-sm text-gray-400">Arbeitsrecht<br>12 Jahre Erfahrung</p></div>
+                            <div class="p-6 rounded-xl bg-white/5 hover:bg-white/10 transition cursor-default"><h3 class="font-semibold mb-2">Marc Fischer</h3><p class="text-sm text-gray-400">Immobilienrecht<br>8 Jahre Erfahrung</p></div>
                         </div>
                     </div>`
             },
             'starter-example': {
-                title: 'Starter-Paket Beispiel — Pizzeria Napoli (One-Pager)',
+                title: 'Starter-Paket — Pizzeria Napoli (One-Pager)',
                 content: `
                     <div class="min-h-full bg-gradient-to-b from-amber-950 to-stone-950">
                         <div class="relative h-[60vh] flex items-center justify-center bg-gradient-to-b from-amber-900/20 to-transparent">
@@ -837,67 +1014,70 @@
                                 <h1 class="text-5xl md:text-6xl font-bold text-amber-100 mb-2" style="font-family:Georgia,serif">Pizzeria Napoli</h1>
                                 <p class="text-amber-300/60 text-lg tracking-widest uppercase mb-2">Authentisch Italienisch seit 1995</p>
                                 <p class="text-gray-400 max-w-md mx-auto mb-8">Steinofen-Pizza, frische Pasta und herzliche Gastfreundschaft im Herzen der Stadt.</p>
-                                <a href="#" class="inline-block px-8 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-full font-semibold transition">Speisekarte ansehen</a>
+                                <a class="demo-link inline-block px-8 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-full font-semibold cursor-pointer transition-all">Speisekarte ansehen ↓</a>
                             </div>
                         </div>
                         <div class="max-w-3xl mx-auto px-6 py-16">
                             <div class="grid md:grid-cols-3 gap-6 mb-16 text-center">
-                                <div class="p-6 rounded-xl bg-white/5"><div class="text-3xl mb-2">📍</div><h3 class="font-semibold text-amber-100 mb-1">Adresse</h3><p class="text-sm text-gray-400">Hauptstraße 12<br>10115 Berlin</p></div>
-                                <div class="p-6 rounded-xl bg-white/5"><div class="text-3xl mb-2">🕐</div><h3 class="font-semibold text-amber-100 mb-1">Öffnungszeiten</h3><p class="text-sm text-gray-400">Di–So: 11:30–22:00<br>Mo: Ruhetag</p></div>
-                                <div class="p-6 rounded-xl bg-white/5"><div class="text-3xl mb-2">📞</div><h3 class="font-semibold text-amber-100 mb-1">Kontakt</h3><p class="text-sm text-gray-400">030 / 123 456 78<br>info@napoli.de</p></div>
+                                <div class="p-6 rounded-xl bg-white/5 hover:bg-white/10 transition"><div class="text-3xl mb-2">📍</div><h3 class="font-semibold text-amber-100 mb-1">Adresse</h3><p class="text-sm text-gray-400">Hauptstraße 12<br>10115 Berlin</p></div>
+                                <div class="p-6 rounded-xl bg-white/5 hover:bg-white/10 transition"><div class="text-3xl mb-2">🕐</div><h3 class="font-semibold text-amber-100 mb-1">Öffnungszeiten</h3><p class="text-sm text-gray-400">Di–So: 11:30–22:00<br>Mo: Ruhetag</p></div>
+                                <div class="p-6 rounded-xl bg-white/5 hover:bg-white/10 transition"><div class="text-3xl mb-2">📞</div><h3 class="font-semibold text-amber-100 mb-1">Kontakt</h3><p class="text-sm text-gray-400">030 / 123 456 78<br>info@napoli.de</p></div>
                             </div>
                             <h2 class="text-2xl font-bold text-amber-100 mb-6 text-center">Unsere Highlights</h2>
                             <div class="grid md:grid-cols-2 gap-4">
-                                <div class="p-5 rounded-xl bg-white/5 border border-amber-500/10"><div class="flex justify-between mb-1"><span class="font-semibold text-amber-100">Margherita</span><span class="text-amber-400 font-semibold">€8.90</span></div><p class="text-sm text-gray-400">Tomaten, Mozzarella, Basilikum</p></div>
-                                <div class="p-5 rounded-xl bg-white/5 border border-amber-500/10"><div class="flex justify-between mb-1"><span class="font-semibold text-amber-100">Quattro Formaggi</span><span class="text-amber-400 font-semibold">€12.90</span></div><p class="text-sm text-gray-400">Vier-Käse mit Gorgonzola & Parmesan</p></div>
-                                <div class="p-5 rounded-xl bg-white/5 border border-amber-500/10"><div class="flex justify-between mb-1"><span class="font-semibold text-amber-100">Pasta Carbonara</span><span class="text-amber-400 font-semibold">€13.90</span></div><p class="text-sm text-gray-400">Guanciale, Eigelb, Pecorino</p></div>
-                                <div class="p-5 rounded-xl bg-white/5 border border-amber-500/10"><div class="flex justify-between mb-1"><span class="font-semibold text-amber-100">Tiramisu</span><span class="text-amber-400 font-semibold">€6.90</span></div><p class="text-sm text-gray-400">Hausgemacht nach Familienrezept</p></div>
+                                <div class="p-5 rounded-xl bg-white/5 border border-amber-500/10 hover:bg-white/10 transition cursor-default"><div class="flex justify-between mb-1"><span class="font-semibold text-amber-100">Margherita</span><span class="text-amber-400 font-semibold">€8.90</span></div><p class="text-sm text-gray-400">Tomaten, Mozzarella, Basilikum</p></div>
+                                <div class="p-5 rounded-xl bg-white/5 border border-amber-500/10 hover:bg-white/10 transition cursor-default"><div class="flex justify-between mb-1"><span class="font-semibold text-amber-100">Quattro Formaggi</span><span class="text-amber-400 font-semibold">€12.90</span></div><p class="text-sm text-gray-400">Vier-Käse mit Gorgonzola & Parmesan</p></div>
+                                <div class="p-5 rounded-xl bg-white/5 border border-amber-500/10 hover:bg-white/10 transition cursor-default"><div class="flex justify-between mb-1"><span class="font-semibold text-amber-100">Pasta Carbonara</span><span class="text-amber-400 font-semibold">€13.90</span></div><p class="text-sm text-gray-400">Guanciale, Eigelb, Pecorino</p></div>
+                                <div class="p-5 rounded-xl bg-white/5 border border-amber-500/10 hover:bg-white/10 transition cursor-default"><div class="flex justify-between mb-1"><span class="font-semibold text-amber-100">Tiramisu</span><span class="text-amber-400 font-semibold">€6.90</span></div><p class="text-sm text-gray-400">Hausgemacht nach Familienrezept</p></div>
                             </div>
                             <div class="mt-16 p-8 rounded-2xl bg-white/5 border border-amber-500/10">
-                                <h3 class="text-xl font-bold text-amber-100 mb-4 text-center">Kontaktformular</h3>
-                                <div class="grid md:grid-cols-2 gap-4 mb-4"><div class="h-10 rounded-lg bg-white/5 border border-white/10"></div><div class="h-10 rounded-lg bg-white/5 border border-white/10"></div></div>
-                                <div class="h-24 rounded-lg bg-white/5 border border-white/10 mb-4"></div>
-                                <div class="h-10 w-40 mx-auto rounded-full bg-amber-600/60"></div>
+                                <h3 class="text-xl font-bold text-amber-100 mb-6 text-center">Schreiben Sie uns</h3>
+                                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                    <input type="text" placeholder="Ihr Name" class="px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-amber-500 focus:outline-none transition">
+                                    <input type="email" placeholder="Ihre E-Mail" class="px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-amber-500 focus:outline-none transition">
+                                </div>
+                                <textarea placeholder="Ihre Nachricht..." rows="3" class="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-amber-500 focus:outline-none transition resize-none mb-4"></textarea>
+                                <button class="w-full py-3 bg-amber-600 hover:bg-amber-500 rounded-lg font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]">Nachricht senden →</button>
                             </div>
-                            <div class="mt-8 text-center text-xs text-gray-600">© 2026 Pizzeria Napoli · Impressum · Datenschutz</div>
+                            <div class="mt-8 text-center text-xs text-gray-600">© 2026 Pizzeria Napoli · <span class="hover:text-white cursor-pointer transition">Impressum</span> · <span class="hover:text-white cursor-pointer transition">Datenschutz</span></div>
                         </div>
                     </div>`
             },
             'pro-example': {
-                title: 'Pro-Paket Beispiel — Meister Müller Sanitär (Mehrseitig + CMS)',
+                title: 'Pro-Paket — Meister Müller Sanitär (Mehrseitig + CMS)',
                 content: `
                     <div class="min-h-full bg-gradient-to-b from-blue-950 to-slate-950">
                         <div class="flex items-center justify-between max-w-5xl mx-auto px-8 py-5 border-b border-white/5">
                             <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center font-bold">MM</div><span class="font-bold text-lg">Meister Müller</span></div>
-                            <div class="flex gap-6 text-sm"><span class="text-white font-medium">Start</span><span class="text-gray-400 hover:text-white cursor-pointer">Leistungen</span><span class="text-gray-400 hover:text-white cursor-pointer">Über uns</span><span class="text-gray-400 hover:text-white cursor-pointer">Referenzen</span><span class="text-gray-400 hover:text-white cursor-pointer">Kontakt</span></div>
+                            <div class="flex gap-6 text-sm"><span class="text-white font-medium">Start</span><span class="text-gray-400 hover:text-white cursor-pointer transition">Leistungen</span><span class="text-gray-400 hover:text-white cursor-pointer transition">Über uns</span><span class="text-gray-400 hover:text-white cursor-pointer transition">Referenzen</span><span class="text-gray-400 hover:text-white cursor-pointer transition">Kontakt</span></div>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 py-20">
-                            <div class="inline-block px-4 py-1.5 rounded-lg bg-red-500/20 text-red-400 text-sm font-semibold mb-4">🔴 24h Notdienst: 0800-123456</div>
+                            <div class="inline-block px-4 py-1.5 rounded-lg bg-red-500/20 text-red-400 text-sm font-semibold mb-4 animate-pulse">🔴 24h Notdienst: 0800-123456</div>
                             <h1 class="text-5xl font-bold mb-4">Ihr Experte für<br><span class="text-blue-400">Sanitär & Heizung</span></h1>
                             <p class="text-gray-400 max-w-lg mb-8">Seit 25 Jahren zuverlässig in der Region. Vom tropfenden Wasserhahn bis zur kompletten Badsanierung — alles aus einer Hand.</p>
-                            <div class="flex gap-4"><a href="#" class="px-6 py-3 bg-blue-600 rounded-lg font-semibold">Kostenlos anfragen</a><a href="#" class="px-6 py-3 bg-white/10 rounded-lg">Unsere Leistungen →</a></div>
+                            <div class="flex gap-4"><a class="demo-link px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold cursor-pointer transition-all">Kostenlos anfragen</a><a class="demo-link px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg cursor-pointer transition-all">Unsere Leistungen →</a></div>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 py-12">
                             <h2 class="text-2xl font-bold mb-8 text-center">Unsere Leistungen</h2>
                             <div class="grid md:grid-cols-3 gap-6">
-                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10"><div class="text-3xl mb-3">🚿</div><h3 class="font-semibold mb-2">Sanitär</h3><p class="text-sm text-gray-400">Installation, Reparatur, Wartung aller Sanitäranlagen. Notdienst 24/7 verfügbar.</p><a href="#" class="text-blue-400 text-sm mt-3 inline-block">Mehr erfahren →</a></div>
-                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10"><div class="text-3xl mb-3">🔥</div><h3 class="font-semibold mb-2">Heizung</h3><p class="text-sm text-gray-400">Einbau, Modernisierung, Wärmepumpen. Energieberatung inklusive.</p><a href="#" class="text-blue-400 text-sm mt-3 inline-block">Mehr erfahren →</a></div>
-                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10"><div class="text-3xl mb-3">🛁</div><h3 class="font-semibold mb-2">Badsanierung</h3><p class="text-sm text-gray-400">Komplett-Renovierung aus einer Hand. Von der Planung bis zur Endreinigung.</p><a href="#" class="text-blue-400 text-sm mt-3 inline-block">Mehr erfahren →</a></div>
+                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 hover:bg-white/10 hover:-translate-y-1 transition-all cursor-default"><div class="text-3xl mb-3">🚿</div><h3 class="font-semibold mb-2">Sanitär</h3><p class="text-sm text-gray-400">Installation, Reparatur, Wartung aller Sanitäranlagen. Notdienst 24/7 verfügbar.</p><span class="demo-link text-blue-400 text-sm mt-3 inline-block cursor-pointer">Mehr erfahren →</span></div>
+                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 hover:bg-white/10 hover:-translate-y-1 transition-all cursor-default"><div class="text-3xl mb-3">🔥</div><h3 class="font-semibold mb-2">Heizung</h3><p class="text-sm text-gray-400">Einbau, Modernisierung, Wärmepumpen. Energieberatung inklusive.</p><span class="demo-link text-blue-400 text-sm mt-3 inline-block cursor-pointer">Mehr erfahren →</span></div>
+                                <div class="p-6 rounded-xl bg-white/5 border border-blue-500/10 hover:bg-white/10 hover:-translate-y-1 transition-all cursor-default"><div class="text-3xl mb-3">🛁</div><h3 class="font-semibold mb-2">Badsanierung</h3><p class="text-sm text-gray-400">Komplett-Renovierung aus einer Hand. Von der Planung bis zur Endreinigung.</p><span class="demo-link text-blue-400 text-sm mt-3 inline-block cursor-pointer">Mehr erfahren →</span></div>
                             </div>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 py-12">
                             <h2 class="text-2xl font-bold mb-8 text-center">Unser Team</h2>
                             <div class="grid md:grid-cols-3 gap-6 text-center">
-                                <div class="p-6 rounded-xl bg-white/5"><div class="w-16 h-16 mx-auto rounded-full bg-blue-500/20 flex items-center justify-center text-2xl mb-3">👨‍🔧</div><h3 class="font-semibold">Hans Müller</h3><p class="text-sm text-blue-400">Meister & Inhaber</p></div>
-                                <div class="p-6 rounded-xl bg-white/5"><div class="w-16 h-16 mx-auto rounded-full bg-blue-500/20 flex items-center justify-center text-2xl mb-3">👨‍🔧</div><h3 class="font-semibold">Thomas Berger</h3><p class="text-sm text-blue-400">Sanitärtechnik</p></div>
-                                <div class="p-6 rounded-xl bg-white/5"><div class="w-16 h-16 mx-auto rounded-full bg-blue-500/20 flex items-center justify-center text-2xl mb-3">👩‍💼</div><h3 class="font-semibold">Lisa Müller</h3><p class="text-sm text-blue-400">Büro & Planung</p></div>
+                                <div class="p-6 rounded-xl bg-white/5 hover:bg-white/10 transition"><div class="w-16 h-16 mx-auto rounded-full bg-blue-500/20 flex items-center justify-center text-2xl mb-3">👨‍🔧</div><h3 class="font-semibold">Hans Müller</h3><p class="text-sm text-blue-400">Meister & Inhaber</p></div>
+                                <div class="p-6 rounded-xl bg-white/5 hover:bg-white/10 transition"><div class="w-16 h-16 mx-auto rounded-full bg-blue-500/20 flex items-center justify-center text-2xl mb-3">👨‍🔧</div><h3 class="font-semibold">Thomas Berger</h3><p class="text-sm text-blue-400">Sanitärtechnik</p></div>
+                                <div class="p-6 rounded-xl bg-white/5 hover:bg-white/10 transition"><div class="w-16 h-16 mx-auto rounded-full bg-blue-500/20 flex items-center justify-center text-2xl mb-3">👩‍💼</div><h3 class="font-semibold">Lisa Müller</h3><p class="text-sm text-blue-400">Büro & Planung</p></div>
                             </div>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 py-12">
                             <h2 class="text-2xl font-bold mb-8 text-center">Referenzen</h2>
                             <div class="grid md:grid-cols-2 gap-6">
-                                <div class="p-6 rounded-xl bg-white/5 border-l-4 border-blue-500"><p class="text-sm text-gray-300 italic mb-3">"Schnell, sauber, zuverlässig. Herr Müller hat unsere komplette Heizung in 3 Tagen modernisiert. Top!"</p><p class="text-xs text-gray-500">— Familie Schneider, Berlin</p></div>
-                                <div class="p-6 rounded-xl bg-white/5 border-l-4 border-blue-500"><p class="text-sm text-gray-300 italic mb-3">"Unser neues Badezimmer ist ein Traum. Von Anfang bis Ende professionell betreut."</p><p class="text-xs text-gray-500">— Herr Wagner, Potsdam</p></div>
+                                <div class="p-6 rounded-xl bg-white/5 border-l-4 border-blue-500 hover:bg-white/10 transition"><p class="text-sm text-gray-300 italic mb-3">"Schnell, sauber, zuverlässig. Herr Müller hat unsere komplette Heizung in 3 Tagen modernisiert. Top!"</p><p class="text-xs text-gray-500">— Familie Schneider, Berlin</p></div>
+                                <div class="p-6 rounded-xl bg-white/5 border-l-4 border-blue-500 hover:bg-white/10 transition"><p class="text-sm text-gray-300 italic mb-3">"Unser neues Badezimmer ist ein Traum. Von Anfang bis Ende professionell betreut."</p><p class="text-xs text-gray-500">— Herr Wagner, Potsdam</p></div>
                             </div>
                         </div>
                         <div class="max-w-3xl mx-auto px-8 py-12">
@@ -908,42 +1088,42 @@
                     </div>`
             },
             'premium-example': {
-                title: 'Premium-Paket Beispiel — IRONPULSE Mitglieder-App',
+                title: 'Premium-Paket — IRONPULSE Mitglieder-App',
                 content: `
                     <div class="min-h-full bg-gradient-to-b from-violet-950 to-slate-950">
                         <div class="flex items-center justify-between max-w-6xl mx-auto px-8 py-4 border-b border-white/5">
                             <span class="text-xl font-black">IRON<span class="text-violet-400">PULSE</span></span>
                             <div class="flex items-center gap-4">
-                                <span class="text-sm text-gray-400">Dashboard</span>
-                                <span class="text-sm text-gray-400">Kurse</span>
-                                <span class="text-sm text-gray-400">Mitglieder</span>
-                                <div class="px-4 py-1.5 rounded-lg bg-violet-600 text-sm font-semibold">Admin Login</div>
+                                <span class="text-sm text-gray-400 hover:text-white cursor-pointer transition">Dashboard</span>
+                                <span class="text-sm text-gray-400 hover:text-white cursor-pointer transition">Kurse</span>
+                                <span class="text-sm text-gray-400 hover:text-white cursor-pointer transition">Mitglieder</span>
+                                <div class="px-4 py-1.5 rounded-lg bg-violet-600 hover:bg-violet-500 text-sm font-semibold cursor-pointer transition">Admin Login</div>
                             </div>
                         </div>
                         <div class="max-w-6xl mx-auto px-8 py-8">
                             <div class="flex items-center justify-between mb-8"><h1 class="text-2xl font-bold">Dashboard</h1><span class="text-sm text-gray-400">Willkommen, Max 👋</span></div>
                             <div class="grid md:grid-cols-4 gap-4 mb-8">
-                                <div class="p-5 rounded-xl bg-white/5"><div class="text-xs text-gray-500 mb-1">Aktive Mitglieder</div><div class="text-3xl font-bold text-violet-400">1.247</div><div class="text-xs text-green-400 mt-1">↑ +12 diese Woche</div></div>
-                                <div class="p-5 rounded-xl bg-white/5"><div class="text-xs text-gray-500 mb-1">Buchungen heute</div><div class="text-3xl font-bold text-blue-400">38</div><div class="text-xs text-gray-500 mt-1">von 50 Plätzen</div></div>
-                                <div class="p-5 rounded-xl bg-white/5"><div class="text-xs text-gray-500 mb-1">Umsatz (Monat)</div><div class="text-3xl font-bold text-green-400">€24.8k</div><div class="text-xs text-green-400 mt-1">↑ +8% vs. Vormonat</div></div>
-                                <div class="p-5 rounded-xl bg-white/5"><div class="text-xs text-gray-500 mb-1">Auslastung</div><div class="text-3xl font-bold text-amber-400">76%</div><div class="text-xs text-gray-500 mt-1">Ø letzte 30 Tage</div></div>
+                                <div class="p-5 rounded-xl bg-white/5 hover:bg-white/10 transition cursor-default"><div class="text-xs text-gray-500 mb-1">Aktive Mitglieder</div><div class="text-3xl font-bold text-violet-400">1.247</div><div class="text-xs text-green-400 mt-1">↑ +12 diese Woche</div></div>
+                                <div class="p-5 rounded-xl bg-white/5 hover:bg-white/10 transition cursor-default"><div class="text-xs text-gray-500 mb-1">Buchungen heute</div><div class="text-3xl font-bold text-blue-400">38</div><div class="text-xs text-gray-500 mt-1">von 50 Plätzen</div></div>
+                                <div class="p-5 rounded-xl bg-white/5 hover:bg-white/10 transition cursor-default"><div class="text-xs text-gray-500 mb-1">Umsatz (Monat)</div><div class="text-3xl font-bold text-green-400">€24.8k</div><div class="text-xs text-green-400 mt-1">↑ +8% vs. Vormonat</div></div>
+                                <div class="p-5 rounded-xl bg-white/5 hover:bg-white/10 transition cursor-default"><div class="text-xs text-gray-500 mb-1">Auslastung</div><div class="text-3xl font-bold text-amber-400">76%</div><div class="text-xs text-gray-500 mt-1">Ø letzte 30 Tage</div></div>
                             </div>
                             <div class="grid md:grid-cols-3 gap-6 mb-8">
                                 <div class="md:col-span-2 p-6 rounded-xl bg-white/5">
                                     <h3 class="font-semibold mb-4">Heutige Kurse</h3>
                                     <div class="space-y-3">
-                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white/5"><div><span class="font-medium">Yoga Flow</span><span class="text-xs text-gray-400 ml-3">09:00</span></div><div class="flex items-center gap-2"><span class="text-xs text-gray-400">18/20</span><span class="px-2 py-0.5 rounded bg-green-500/20 text-green-400 text-xs">Fast voll</span></div></div>
-                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white/5"><div><span class="font-medium">HIIT Power</span><span class="text-xs text-gray-400 ml-3">10:30</span></div><div class="flex items-center gap-2"><span class="text-xs text-gray-400">12/25</span><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-xs">Verfügbar</span></div></div>
-                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white/5"><div><span class="font-medium">Spinning</span><span class="text-xs text-gray-400 ml-3">17:00</span></div><div class="flex items-center gap-2"><span class="text-xs text-gray-400">20/20</span><span class="px-2 py-0.5 rounded bg-red-500/20 text-red-400 text-xs">Ausgebucht</span></div></div>
-                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white/5"><div><span class="font-medium">Krafttraining</span><span class="text-xs text-gray-400 ml-3">18:30</span></div><div class="flex items-center gap-2"><span class="text-xs text-gray-400">8/15</span><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-xs">Verfügbar</span></div></div>
+                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white/5 hover:bg-white/10 transition cursor-pointer"><div><span class="font-medium">Yoga Flow</span><span class="text-xs text-gray-400 ml-3">09:00</span></div><div class="flex items-center gap-2"><span class="text-xs text-gray-400">18/20</span><span class="px-2 py-0.5 rounded bg-green-500/20 text-green-400 text-xs">Fast voll</span></div></div>
+                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white/5 hover:bg-white/10 transition cursor-pointer"><div><span class="font-medium">HIIT Power</span><span class="text-xs text-gray-400 ml-3">10:30</span></div><div class="flex items-center gap-2"><span class="text-xs text-gray-400">12/25</span><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-xs">Verfügbar</span></div></div>
+                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white/5 hover:bg-white/10 transition cursor-pointer"><div><span class="font-medium">Spinning</span><span class="text-xs text-gray-400 ml-3">17:00</span></div><div class="flex items-center gap-2"><span class="text-xs text-gray-400">20/20</span><span class="px-2 py-0.5 rounded bg-red-500/20 text-red-400 text-xs">Ausgebucht</span></div></div>
+                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white/5 hover:bg-white/10 transition cursor-pointer"><div><span class="font-medium">Krafttraining</span><span class="text-xs text-gray-400 ml-3">18:30</span></div><div class="flex items-center gap-2"><span class="text-xs text-gray-400">8/15</span><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-xs">Verfügbar</span></div></div>
                                     </div>
                                 </div>
                                 <div class="p-6 rounded-xl bg-white/5">
                                     <h3 class="font-semibold mb-4">Neue Mitglieder</h3>
                                     <div class="space-y-4">
-                                        <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-violet-500/30 flex items-center justify-center text-xs">LS</div><div><div class="text-sm font-medium">Laura S.</div><div class="text-xs text-gray-500">Premium · heute</div></div></div>
-                                        <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-blue-500/30 flex items-center justify-center text-xs">MK</div><div><div class="text-sm font-medium">Marco K.</div><div class="text-xs text-gray-500">Basic · gestern</div></div></div>
-                                        <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-green-500/30 flex items-center justify-center text-xs">AF</div><div><div class="text-sm font-medium">Anna F.</div><div class="text-xs text-gray-500">Premium · vor 2 Tagen</div></div></div>
+                                        <div class="flex items-center gap-3 hover:bg-white/5 p-2 rounded-lg transition cursor-pointer"><div class="w-8 h-8 rounded-full bg-violet-500/30 flex items-center justify-center text-xs">LS</div><div><div class="text-sm font-medium">Laura S.</div><div class="text-xs text-gray-500">Premium · heute</div></div></div>
+                                        <div class="flex items-center gap-3 hover:bg-white/5 p-2 rounded-lg transition cursor-pointer"><div class="w-8 h-8 rounded-full bg-blue-500/30 flex items-center justify-center text-xs">MK</div><div><div class="text-sm font-medium">Marco K.</div><div class="text-xs text-gray-500">Basic · gestern</div></div></div>
+                                        <div class="flex items-center gap-3 hover:bg-white/5 p-2 rounded-lg transition cursor-pointer"><div class="w-8 h-8 rounded-full bg-green-500/30 flex items-center justify-center text-xs">AF</div><div><div class="text-sm font-medium">Anna F.</div><div class="text-xs text-gray-500">Premium · vor 2 Tagen</div></div></div>
                                     </div>
                                 </div>
                             </div>
@@ -962,13 +1142,13 @@
                             <div class="text-6xl mb-6">🏋️</div>
                             <h1 class="text-6xl font-black mb-4 tracking-tight">IRON<span class="text-violet-400">PULSE</span></h1>
                             <p class="text-gray-400 max-w-lg mx-auto mb-8">Push your limits. Modernste Geräte, Top-Trainer, 24/7 geöffnet.</p>
-                            <div class="flex justify-center gap-4"><a href="#" class="px-8 py-3 bg-violet-600 rounded-full font-bold">Probetraining buchen</a><a href="#" class="px-8 py-3 bg-white/10 rounded-full">Mitglied werden</a></div>
+                            <div class="flex justify-center gap-4"><a class="demo-link px-8 py-3 bg-violet-600 hover:bg-violet-500 rounded-full font-bold cursor-pointer transition-all">Probetraining buchen</a><a class="demo-link px-8 py-3 bg-white/10 hover:bg-white/20 rounded-full cursor-pointer transition-all">Mitglied werden</a></div>
                         </div>
                         <div class="max-w-5xl mx-auto px-8 pb-16 grid md:grid-cols-4 gap-4 text-center">
-                            <div class="p-4 rounded-xl bg-white/5"><div class="text-2xl font-bold text-violet-400">500+</div><div class="text-xs text-gray-500">Mitglieder</div></div>
-                            <div class="p-4 rounded-xl bg-white/5"><div class="text-2xl font-bold text-violet-400">24/7</div><div class="text-xs text-gray-500">Geöffnet</div></div>
-                            <div class="p-4 rounded-xl bg-white/5"><div class="text-2xl font-bold text-violet-400">50+</div><div class="text-xs text-gray-500">Kurse/Woche</div></div>
-                            <div class="p-4 rounded-xl bg-white/5"><div class="text-2xl font-bold text-violet-400">15</div><div class="text-xs text-gray-500">Personal Trainer</div></div>
+                            <div class="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition"><div class="text-2xl font-bold text-violet-400">500+</div><div class="text-xs text-gray-500">Mitglieder</div></div>
+                            <div class="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition"><div class="text-2xl font-bold text-violet-400">24/7</div><div class="text-xs text-gray-500">Geöffnet</div></div>
+                            <div class="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition"><div class="text-2xl font-bold text-violet-400">50+</div><div class="text-xs text-gray-500">Kurse/Woche</div></div>
+                            <div class="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition"><div class="text-2xl font-bold text-violet-400">15</div><div class="text-xs text-gray-500">Personal Trainer</div></div>
                         </div>
                     </div>`
             }
@@ -977,26 +1157,60 @@
         function openDemo(key) {
             const demo = demos[key];
             if (!demo) return;
+            const modal = document.getElementById('demo-modal');
             document.getElementById('demo-title').textContent = demo.title;
             document.getElementById('demo-content').innerHTML = demo.content;
-            document.getElementById('demo-modal').classList.remove('hidden');
+            modal.classList.remove('hidden');
+            modal.classList.add('modal-entering');
             document.body.style.overflow = 'hidden';
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    modal.classList.remove('modal-entering');
+                    modal.classList.add('modal-visible');
+                });
+            });
         }
 
         function closeDemo() {
-            document.getElementById('demo-modal').classList.add('hidden');
-            document.body.style.overflow = '';
+            const modal = document.getElementById('demo-modal');
+            modal.classList.remove('modal-visible');
+            modal.classList.add('modal-entering');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('modal-entering');
+                document.body.style.overflow = '';
+            }, 300);
         }
 
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDemo(); });
 
-        // Form submit
+        // ===== FORM =====
         function submitForm(e) {
             e.preventDefault();
-            document.getElementById('form-success').classList.remove('hidden');
-            e.target.reset();
-            setTimeout(() => document.getElementById('form-success').classList.add('hidden'), 5000);
+            const btn = document.getElementById('submit-btn');
+            btn.textContent = 'Wird gesendet...';
+            btn.disabled = true;
+            setTimeout(() => {
+                document.getElementById('form-success').classList.remove('hidden');
+                btn.textContent = 'Kostenlos beraten lassen →';
+                btn.disabled = false;
+                e.target.reset();
+                setTimeout(() => document.getElementById('form-success').classList.add('hidden'), 5000);
+            }, 800);
         }
+
+        // ===== SMOOTH SCROLL for nav links =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
     </script>
 </body>
 </html>
