@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Zugangsdaten – Statlift</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0f1e;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 20%, rgba(99,102,241,0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(168,85,247,0.10) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 24px;
+    padding: 48px;
+    max-width: 560px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 32px 64px rgba(0,0,0,0.4);
+  }
+
+  .logo {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 32px;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+
+  .security-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(99,102,241,0.12);
+    border: 1px solid rgba(99,102,241,0.25);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 32px;
+  }
+
+  .security-badge svg {
+    flex-shrink: 0;
+    color: #818cf8;
+  }
+
+  .security-badge span {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+  }
+
+  .field {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+  }
+
+  input {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 15px;
+    color: #fff;
+    font-family: inherit;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    outline: none;
+    -webkit-autofill-override: unset;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #111827 inset !important;
+    -webkit-text-fill-color: #fff !important;
+    caret-color: #fff;
+  }
+
+  input:focus {
+    border-color: rgba(99,102,241,0.6);
+    background: rgba(255,255,255,0.07);
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+  }
+
+  input::placeholder { color: rgba(255,255,255,0.25); }
+
+  .hint {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  .hint a {
+    color: #818cf8;
+    text-decoration: none;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin: 28px 0;
+  }
+
+  .instruction-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 28px;
+  }
+
+  .instruction-box h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .steps {
+    list-style: none;
+    counter-reset: step;
+  }
+
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+  }
+
+  .steps li::before {
+    content: counter(step);
+    background: rgba(99,102,241,0.3);
+    color: #818cf8;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .steps li code {
+    background: rgba(255,255,255,0.07);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #a5b4fc;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+    box-shadow: 0 8px 24px rgba(99,102,241,0.35);
+    letter-spacing: 0.2px;
+  }
+
+  button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(99,102,241,0.45);
+  }
+
+  button[type="submit"]:active { transform: translateY(0); }
+
+  button[type="submit"]:disabled {
+    opacity: 0.5;
+    cursor: default;
+    transform: none;
+  }
+
+  /* Success / Error States */
+  .message {
+    display: none;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .message.success {
+    background: rgba(34,197,94,0.12);
+    border: 1px solid rgba(34,197,94,0.3);
+    color: #86efac;
+  }
+
+  .message.error {
+    background: rgba(239,68,68,0.12);
+    border: 1px solid rgba(239,68,68,0.3);
+    color: #fca5a5;
+  }
+
+  .spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo">Statlift</div>
+  <h1>🔒 WordPress Zugangsdaten übermitteln</h1>
+  <p class="subtitle">Damit wir Ihre Blogartikel automatisch auf Ihrer Website veröffentlichen können, benötigen wir einmalig Ihre Zugangsdaten.</p>
+
+  <div class="security-badge">
+    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    </svg>
+    <span>Ihre Daten werden <strong>verschlüsselt übertragen</strong> und ausschließlich zur automatischen Blog-Veröffentlichung genutzt.</span>
+  </div>
+
+  <div class="instruction-box">
+    <h3>So erstellen Sie ein App-Passwort in WordPress</h3>
+    <ol class="steps">
+      <li>Melden Sie sich in Ihrem WordPress-Dashboard an</li>
+      <li>Gehen Sie zu <code>Benutzer → Profil</code></li>
+      <li>Scrollen Sie nach unten zu <code>Anwendungspasswörter</code></li>
+      <li>Tragen Sie <code>Statlift</code> ein und klicken Sie auf <code>Neues Passwort erstellen</code></li>
+      <li>Kopieren Sie das angezeigte Passwort und fügen Sie es unten ein</li>
+    </ol>
+  </div>
+
+  <form id="wpForm" novalidate>
+    <div class="field">
+      <label for="email">Ihre E-Mail-Adresse (Abo-Adresse) *</label>
+      <input type="email" id="email" name="email" placeholder="mail@ihrewebsite.de" required>
+    </div>
+
+    <div class="field">
+      <label for="wpUrl">WordPress Website URL *</label>
+      <input type="url" id="wpUrl" name="wpUrl" placeholder="https://ihrewebsite.de" required>
+      <div class="hint">Ohne abschließenden Schrägstrich, z.B. https://ihrewebsite.de</div>
+    </div>
+
+    <div class="field">
+      <label for="wpUser">WordPress Benutzername *</label>
+      <input type="text" id="wpUser" name="wpUser" placeholder="Ihr WordPress-Login-Name" required autocomplete="username">
+    </div>
+
+    <div class="field">
+      <label for="wpPass">App-Passwort (aus WordPress erstellt) *</label>
+      <input type="password" id="wpPass" name="wpPass" placeholder="xxxx xxxx xxxx xxxx xxxx xxxx" required autocomplete="new-password">
+      <div class="hint">Nutzen Sie bitte ein <strong>App-Passwort</strong>, nicht Ihr normales WordPress-Passwort. <a href="https://wordpress.org/documentation/article/application-passwords/" target="_blank">Mehr erfahren →</a></div>
+    </div>
+
+    <hr class="divider">
+
+    <button type="submit" id="submitBtn">
+      🔒 Sicher übermitteln
+    </button>
+  </form>
+
+  <div class="message success" id="successMsg">
+    <strong>Vielen Dank!</strong><br>
+    Ihre Zugangsdaten wurden erfolgreich und sicher übermittelt. Wir starten jetzt mit der Vorbereitung Ihrer personalisierten Blogartikel. Sie müssen nichts weiter tun – Ihr erster Artikel erscheint automatisch kommenden Montag auf Ihrer Website.
+  </div>
+
+  <div class="message error" id="errorMsg">
+    <strong>Ups, da ist etwas schiefgelaufen.</strong><br>
+    Bitte prüfen Sie Ihre Eingaben und versuchen Sie es erneut. Falls das Problem weiterhin besteht, antworten Sie einfach auf Ihre Willkommens-E-Mail.
+  </div>
+</div>
+
+<script>
+  // IMPORTANT: Replace with your actual n8n webhook URL
+  const N8N_WEBHOOK_URL = 'https://DEINE-N8N-URL/webhook/wp-zugangsdaten';
+
+  document.getElementById('wpForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('successMsg');
+    const errorMsg = document.getElementById('errorMsg');
+
+    // Reset
+    successMsg.style.display = 'none';
+    errorMsg.style.display = 'none';
+
+    // Validate
+    const email  = document.getElementById('email').value.trim();
+    const wpUrl  = document.getElementById('wpUrl').value.trim();
+    const wpUser = document.getElementById('wpUser').value.trim();
+    const wpPass = document.getElementById('wpPass').value.trim();
+
+    if (!email || !wpUrl || !wpUser || !wpPass) {
+      errorMsg.textContent = 'Bitte füllen Sie alle Felder aus.';
+      errorMsg.style.display = 'block';
+      return;
+    }
+
+    // Submit
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Wird übermittelt...';
+
+    try {
+      const res = await fetch(N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, wpUrl, wpUser, wpPass })
+      });
+
+      if (res.ok) {
+        document.getElementById('wpForm').style.display = 'none';
+        successMsg.style.display = 'block';
+      } else {
+        throw new Error('Server error');
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btn.innerHTML = '🔒 Sicher übermitteln';
+      errorMsg.style.display = 'block';
+    }
+  });
+</script>
+
+</body>
+</html>
