@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/zugangsdaten", "destination": "/zugangsdaten.html" }
+    { "source": "/WordPress", "destination": "/zugangsdaten.html" }
   ]
 }
