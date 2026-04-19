@@ -1,11 +1,6 @@
 {
   "rewrites": [
-    { "source": "/WordPress", "destination": "/zugangsdaten.html" }
-  ]
-}
-
-{
-  "rewrites": [
+    { "source": "/WordPress", "destination": "/zugangsdaten.html" },
     { "source": "/Feedback", "destination": "/feedback.html" }
   ]
 }
