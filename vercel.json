@@ -1,6 +1,6 @@
 {
   "rewrites": [
     { "source": "/WordPress", "destination": "/zugangsdaten.html" },
-    { "source": "/Feedback", "destination": "/feedback.html" }
+    { "source": "/feedback", "destination": "/feedback.html" }
   ]
 }
