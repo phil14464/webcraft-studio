@@ -3,3 +3,9 @@
     { "source": "/WordPress", "destination": "/zugangsdaten.html" }
   ]
 }
+
+{
+  "rewrites": [
+    { "source": "/Feedback", "destination": "/feedback.html" }
+  ]
+}
