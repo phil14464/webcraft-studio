@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/zugang", "destination": "/zugangsdaten.html" },
+    { "source": "/feedback", "destination": "/feedback.html" }
+  ]
+}
